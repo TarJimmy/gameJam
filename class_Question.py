@@ -5,7 +5,7 @@ class Question:
         self.textFichier = None
         self.numCourant = None
         self.question = None
-        self.reponsesFausses = None
+        self.reponsesFausses = []
         self.reponseJuste = None
         self.solution = None
         self.recupTexteFichier()
@@ -19,18 +19,25 @@ class Question:
         tab = self.textFichier.split('//')
         strNum = str(num)
         if num < len(tab):
-            caseCourante=tab[num]
+            caseCourante=tab[num-1]
             #Vérification du numéro de la question supplémentaire
-            if caseCourante[0] == strNum:
+            if caseCourante[0:1] == strNum:
                 tabInfo = caseCourante.split('|')
                 self.question = tabInfo[1]
                 i = 2
-                for
-            i += 1
-
-        else:
-            print("Erreur dans le nomre")
+                numSolution = tabInfo[len(tabInfo)-2]
+                self.reponsesFausses.clear()
+                while i < len(tabInfo)-2:
+                    reponse = tabInfo[i].split('-')
+                    if reponse[0]==numSolution:
+                        self.reponseJuste = reponse[1]
+                    else:
+                        self.reponsesFausses.append(reponse[1])
+                        hey = 1
+                    i += 1
+            else:
+                print("Erreur dans le nombre")
 
 quest = Question()
-rep = quest.recupQuestionNum()
-print(rep)
+quest.recupTexteFichier()
+print(quest.textFichier)
