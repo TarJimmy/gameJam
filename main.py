@@ -10,7 +10,6 @@ pos_initital = [40, 40, 40, 60]
 game = Game(pos_initital)
 #cree l'unique objet parametre
 param = Parametre()
-elem = pygame.image.load('images/joueur/sol1.png')
 clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((param.verifWidth(960),param.verifHeight(568)))
