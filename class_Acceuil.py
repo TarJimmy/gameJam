@@ -2,7 +2,7 @@ import pygame
 
 class VueAccueil:
     #Construteur de l'accueil
-    def __init__(self):
+    def __init__(self, cheminImage):
         #Largeur de l'écran
         self.width = 800
         #Hauteur de l'écran
@@ -12,7 +12,7 @@ class VueAccueil:
         #Appliquer la taille de l'écran à l'attribut screen
         self.screen = pygame.display.set_mode((self.width,self.height))
         #background comprend l'image de fond
-        self.background = pygame.image.load('images/ciel.jpg')
+        self.background = pygame.image.load(chemin_image + 'ciel.jpg')
         #redimensionne l'image
         self.background = pygame.transform.scale(self.background,((self.width),self.height))
         #running est l'attribut ui précise si l'écran est activé
