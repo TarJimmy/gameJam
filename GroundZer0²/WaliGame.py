@@ -7,8 +7,10 @@ pygame.display.set_caption("WaliGame")
 clock = pygame.time.Clock()
 walkRight = [pygame.image.load('R1.png'), pygame.image.load('R2.png'), pygame.image.load('R3.png'), pygame.image.load('R4.png'), pygame.image.load('R5.png'), pygame.image.load('R6.png'), pygame.image.load('R7.png'), pygame.image.load('R8.png'), pygame.image.load('R9.png')]
 walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png'), pygame.image.load('L3.png'), pygame.image.load('L4.png'), pygame.image.load('L5.png'), pygame.image.load('L6.png'), pygame.image.load('L7.png'), pygame.image.load('L8.png'), pygame.image.load('L9.png')]
-bg = pygame.image.load('bg11.jpg')
-elem = pygame.image.load('sol1.png')
+bg = [pygame.image.load('bg1.jpg'), pygame.image.load('bg2.jpg'), pygame.image.load('bg3.jpg'), pygame.image.load('bg4.jpg'), pygame.image.load('bg5.jpg'), pygame.image.load('bg6.jpg'), pygame.image.load('bg7.jpg'), pygame.image.load('bg8.jpg'), pygame.image.load('bg9.jpg'), pygame.image.load('bg10.jpg')]
+elem1 = pygame.image.load('sol1.png')
+elem2 = pygame.image.load('sol2.png')
+np = 0
 
 char = pygame.image.load('standing.png')
 
@@ -38,12 +40,36 @@ class player(object):
         else:
             win.blit(char, (self.x,self.y))
 
+def plateaux(np):
+
+    win.blit(bg[np], (0, 0))
+
+def changerPlateaux():
+    global np
+    if man.x > 940:
+        np += 1
+        man.x = -15
+        man.y = 390
+    if man.x < -20 and np > 0:
+        np -= 1
+        man.x = 930
+        man.y = 390
+    if man.x < -20 and np == 0:
+        man.x = 15
+        man.y = 390
+
+
+
+
 def redraxGameWindow():
-        win.blit(bg, (0, 0))
-        win.blit(elem, (200, 280))
+        global np
+        plateaux(np)
+        changerPlateaux()
+        # win.blit(elem, (200, 390))
         i = 0
         while i < 950:
-            win.blit(elem, (i, 330))
+            win.blit(elem1, (i, 450))
+            win.blit(elem2, (i, 510))
             i += 62
         man.draw(win)
         pygame.display.update()
@@ -51,10 +77,10 @@ def redraxGameWindow():
 
 def sol1():
 
-    plateau11x = 0
+    plateau11x = -30
     plateau12x = 960
-    plateau11y = 330
-    plateau12y = 340
+    plateau11y = 450
+    plateau12y = 568
 
     if (plateau11x <= man.x and plateau11y - man.height - man.vel <= man.y and plateau12x >= man.x and plateau12y - man.height - man.vel >= man.y):
         return True
@@ -117,18 +143,18 @@ man = player(40, 40, 40, 60)
 run = True
 
 while run:
-    clock.tick(40)
+    clock.tick(80)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_LEFT] and man.x > man.vel:
+    if keys[pygame.K_LEFT]:
         man.x -= man.vel
         man.left = True
         man.right = False
-    elif keys[pygame.K_RIGHT] and man.x < 960 - man.width - man.vel:
+    elif keys[pygame.K_RIGHT]:
         man.x += man.vel
         man.right = True
         man.left = False

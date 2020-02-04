@@ -1,5 +1,20 @@
 
 class Parametre:
-    #pour affichage correct sur vidéo-projecteur
-    widthMax = 1024
-    heightMax = 768
+    def __init__(self):
+        #pour affichage correct sur vidéo-projecteur
+        self.widthMax = 1024
+        self.heightMax = 768
+
+    def verifWidth(self,width):
+        if (width < self.widthMax):
+            return width
+        else:
+            print("Largeur de la fenetre redimensionnée")
+            return widthMax
+
+    def verifHeight(self,height):
+        if (height < self.heightMax):
+            return height
+        else:
+            print("Hauteur de la fenetre redimensionnée")
+            return heightMax
