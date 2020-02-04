@@ -20,24 +20,26 @@ class Question:
         strNum = str(num)
         if num < len(tab):
             caseCourante=tab[num-1]
-            #Vérification du numéro de la question supplémentaire
-            if caseCourante[0:1] == strNum:
-                tabInfo = caseCourante.split('|')
-                self.question = tabInfo[1]
-                i = 2
-                numSolution = tabInfo[len(tabInfo)-2]
-                self.reponsesFausses.clear()
-                while i < len(tabInfo)-2:
-                    reponse = tabInfo[i].split('-')
-                    if reponse[0]==numSolution:
-                        self.reponseJuste = reponse[1]
-                    else:
-                        self.reponsesFausses.append(reponse[1])
-                        hey = 1
-                    i += 1
-            else:
-                print("Erreur dans le nombre")
+            tabInfo = caseCourante.split('|')
+            self.question = tabInfo[1]
+            self.solution=tabInfo[len(tabInfo)-1]
+            i = 2
+            numSolution = tabInfo[len(tabInfo)-2]
+            self.reponsesFausses.clear()
+            while i < len(tabInfo)-2:
+                reponse = tabInfo[i].split('-')
+                if reponse[0]==numSolution:
+                    self.reponseJuste = reponse[1]
+                else:
+                    self.reponsesFausses.append(reponse[1])
+                    hey = 1
+                i += 1
+        else:
+            print("Erreur dans le nombre")
 
 quest = Question()
-quest.recupTexteFichier()
-print(quest.textFichier)
+quest.recupQuestionNum(10)
+print(quest.question)
+print(quest.reponsesFausses)
+print(quest.reponseJuste)
+print(quest.solution)
