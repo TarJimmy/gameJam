@@ -14,7 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.left = False
         self.right = False
         self.walkCount = 0
-        cheminImage = "images/joueur/"
+        cheminImage = "images/player/"
         self.walkRight = [
             pygame.image.load(cheminImage+'R1.png'),
             pygame.image.load(cheminImage+'R2.png'),

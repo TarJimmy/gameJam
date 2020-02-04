@@ -5,12 +5,12 @@ from class_Player import Player
 
 pygame.init()
 #order : x,y, width, height
-pos_initital = [40, 40, 40, 60]
-#creer l'unique objet jeux, le joeuur fait partie du jeux
-game = Game(pos_initital)
+pos_initialP = [40, 40, 40, 60]
+pos_initialN = [700, 395, 40, 60]
+#creer l'unique objet jeu, le joueur et le npc font partie du jeu
+game = Game(pos_initialP,pos_initialN)
 #cree l'unique objet parametre
 param = Parametre()
-elem = pygame.image.load('images/joueur/sol1.png')
 clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((param.verifWidth(960),param.verifHeight(568)))
