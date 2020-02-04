@@ -3,22 +3,22 @@ from class_Player import Player
 from class_Object import Object
 class Game:
     def __init__(self, pos_initital):
-        cheminImage = 'images/joueur/'
+        cheminBackGround = 'images/backgrounds/'
         self.pos_initital = pos_initital
         self.gravity = 2
         self.np = 0
         #Ordre des backgrounds
         self.bg = [
-            pygame.image.load(cheminImage + 'bg1.jpg'),
-            pygame.image.load(cheminImage + 'bg2.jpg'),
-            pygame.image.load(cheminImage + 'bg3.jpg'),
-            pygame.image.load(cheminImage + 'bg4.jpg'),
-            pygame.image.load(cheminImage + 'bg5.jpg'),
-            pygame.image.load(cheminImage + 'bg6.jpg'),
-            pygame.image.load(cheminImage + 'bg7.jpg'),
-            pygame.image.load(cheminImage + 'bg8.jpg'),
-            pygame.image.load(cheminImage + 'bg9.jpg'),
-            pygame.image.load(cheminImage + 'bg10.jpg')
+            pygame.image.load(cheminBackGround + 'bg1.jpg'),
+            pygame.image.load(cheminBackGround + 'bg2.jpg'),
+            pygame.image.load(cheminBackGround + 'bg3.jpg'),
+            pygame.image.load(cheminBackGround + 'bg4.jpg'),
+            pygame.image.load(cheminBackGround + 'bg5.jpg'),
+            pygame.image.load(cheminBackGround + 'bg6.jpg'),
+            pygame.image.load(cheminBackGround + 'bg7.jpg'),
+            pygame.image.load(cheminBackGround + 'bg8.jpg'),
+            pygame.image.load(cheminBackGround + 'bg9.jpg'),
+            pygame.image.load(cheminBackGround + 'bg10.jpg')
         ]
         #generer notre joueur
         self.player = Player(
