@@ -12,7 +12,7 @@ class Npc(pygame.sprite.Sprite):
         self.lose = False
         cheminImage = "images/npc/"
         self.let_pass = [
-            #image suppr, a recup pygame.image.load(cheminImage+'L10E.png'),
+            pygame.image.load(cheminImage+'L10E.png'),
             pygame.image.load(cheminImage+'L11E.png'),
             pygame.image.load(cheminImage+'L7E.png')
         ]

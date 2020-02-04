@@ -7,8 +7,9 @@ pygame.init()
 #order : x,y, width, height
 pos_initialP = [40, 40, 40, 60]
 pos_initialN = [700, 395, 40, 60]
+pos_initialO = [100, 420]
 #creer l'unique objet jeu, le joueur et le npc font partie du jeu
-game = Game(pos_initialP,pos_initialN)
+game = Game(pos_initialP,pos_initialN,pos_initialO)
 #cree l'unique objet parametre
 param = Parametre()
 clock = pygame.time.Clock()
@@ -34,7 +35,8 @@ while running:
         game.player.no_move()
 
     if not (game.player.isJump):
-        if keys[pygame.K_SPACE]:
+        #Si la touche espace est enfoncée et si le player n'est pas proche du npc
+        if keys[pygame.K_SPACE] and not (game.isNear):
             game.player.jump()
         else:
             game.gravite()
