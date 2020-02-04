@@ -113,11 +113,11 @@ class Game:
 
     def gravite(self):
         if(self.verifGravite()==False):
-            print("jy passe)")
             self.player.y += 7
             self.player.isJump = False
-        else:
-            print("jy passe pas")
+        if(self.player.y>390):
+            self.player.y = 390
+
     def plateaux(self,screen):
         screen.blit(self.bg[self.np], (0, 0))
 
@@ -137,9 +137,9 @@ class Game:
     def createSol(self):
         i = 0
         while i < 950:
-            self.addSol(i,450,'images/objects/sol1.png')
-            self.addSol(i,510,'images/objects/sol2.png')
-            i += 62
+            self.addSol(i-3,450,'images/objects/sol1.png')
+            self.addSol(i-3,510,'images/objects/sol2.png')
+            i += 62 
 
     def afficherSol(self, screen):
         for solCourant in self.mesSols:
