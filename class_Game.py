@@ -52,6 +52,8 @@ class Game:
         if(self.verifGravite()==False):
             self.player.y += 7
             self.player.isJump = False
+        if(self.player.y>390):
+            self.player.y = 390
 
     def plateaux(self,screen):
         screen.blit(self.bg[self.np], (0, 0))
