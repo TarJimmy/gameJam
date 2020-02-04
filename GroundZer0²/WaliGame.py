@@ -7,8 +7,9 @@ pygame.display.set_caption("WaliGame")
 clock = pygame.time.Clock()
 walkRight = [pygame.image.load('R1.png'), pygame.image.load('R2.png'), pygame.image.load('R3.png'), pygame.image.load('R4.png'), pygame.image.load('R5.png'), pygame.image.load('R6.png'), pygame.image.load('R7.png'), pygame.image.load('R8.png'), pygame.image.load('R9.png')]
 walkLeft = [pygame.image.load('L1.png'), pygame.image.load('L2.png'), pygame.image.load('L3.png'), pygame.image.load('L4.png'), pygame.image.load('L5.png'), pygame.image.load('L6.png'), pygame.image.load('L7.png'), pygame.image.load('L8.png'), pygame.image.load('L9.png')]
-bg = pygame.image.load('bg11.jpg')
-elem = pygame.image.load('sol1.png')
+bg = pygame.image.load('bg10.jpg')
+elem1 = pygame.image.load('sol1.png')
+elem2 = pygame.image.load('sol2.png')
 
 char = pygame.image.load('standing.png')
 
@@ -40,10 +41,11 @@ class player(object):
 
 def redraxGameWindow():
         win.blit(bg, (0, 0))
-        win.blit(elem, (200, 280))
+        # win.blit(elem, (200, 390))
         i = 0
         while i < 950:
-            win.blit(elem, (i, 330))
+            win.blit(elem1, (i, 450))
+            win.blit(elem2, (i, 510))
             i += 62
         man.draw(win)
         pygame.display.update()
@@ -53,8 +55,8 @@ def sol1():
 
     plateau11x = 0
     plateau12x = 960
-    plateau11y = 330
-    plateau12y = 340
+    plateau11y = 450
+    plateau12y = 568
 
     if (plateau11x <= man.x and plateau11y - man.height - man.vel <= man.y and plateau12x >= man.x and plateau12y - man.height - man.vel >= man.y):
         return True
@@ -117,7 +119,7 @@ man = player(40, 40, 40, 60)
 run = True
 
 while run:
-    clock.tick(40)
+    clock.tick(50)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
