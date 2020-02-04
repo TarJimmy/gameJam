@@ -85,7 +85,7 @@ class Game:
         while i < 950:
             self.addSol(i-3,450,'images/objects/sol1.png')
             self.addSol(i-3,510,'images/objects/sol2.png')
-            i += 62
+            i += 62 
 
     def afficherSol(self, screen):
         for solCourant in self.mesSols:
