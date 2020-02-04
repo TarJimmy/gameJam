@@ -3,6 +3,21 @@ import pygame
 class VueAccueil:
     #Construteur de l'accueil
     def __init__(self):
+#    #Bouton credit
+#        self.credit = bouton()
+        #Bouton jouer
+#        self.jouer= bouton()
+        #bouton quitter
+#        self.quitter= bouton()
+        #Bouton jouer
+        Bouton_jouer = pygame.image.load("images/play.png").convert_alpha()
+        Bouton_jouerPos = (540, 250)
+        fenetre.blit(Bouton_jouer, Bouton_jouerPos)
+
+
+
+
+
         #Largeur de l'écran
         self.width = 800
         #Hauteur de l'écran
