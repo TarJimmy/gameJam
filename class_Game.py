@@ -1,10 +1,12 @@
 import pygame
 from class_Player import Player
 from class_Object import Object
+from class_Npc import Npc
 class Game:
-    def __init__(self, pos_initital):
+    def __init__(self, pos_initialP, pos_initialN):
         cheminBackGround = 'images/backgrounds/'
-        self.pos_initital = pos_initital
+        self.pos_initialP = pos_initialP
+        self.pos_initialN = pos_initialN
         self.gravity = 2
         self.np = 0
         #Ordre des backgrounds
@@ -22,12 +24,19 @@ class Game:
         ]
         #generer notre joueur
         self.player = Player(
-            self.pos_initital[0],
-            self.pos_initital[1],
-            self.pos_initital[2],
-            self.pos_initital[3]
+            self.pos_initialP[0],
+            self.pos_initialP[1],
+            self.pos_initialP[2],
+            self.pos_initialP[3]
             )
         self.mesSols = []
+        #generer notre npc
+        self.npc = Npc(
+            self.pos_initialN[0],
+            self.pos_initialN[1],
+            self.pos_initialN[2],
+            self.pos_initialN[3]
+        )
 
     def addSol(self, x,y):
         sol = Object(x,y)
@@ -86,3 +95,4 @@ class Game:
         self.changerPlateaux()
         self.afficherSol(screen)
         self.player.draw(screen)
+        self.npc.draw(screen)
