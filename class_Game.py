@@ -59,7 +59,6 @@ class Game:
 
     def gravite(self):
         if(self.verifGravite()==False):
-            print("jy passe)")
             self.player.y += 7
             self.player.isJump = False
         if(self.player.y>390):
@@ -84,9 +83,9 @@ class Game:
     def createSol(self):
         i = 0
         while i < 950:
-            self.addSol(i,450,'images/objects/sol1.png')
-            self.addSol(i,510,'images/objects/sol2.png')
-            i += 62
+            self.addSol(i-3,450,'images/objects/sol1.png')
+            self.addSol(i-3,510,'images/objects/sol2.png')
+            i += 62 
 
     def afficherSol(self, screen):
         for solCourant in self.mesSols:
