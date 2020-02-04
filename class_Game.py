@@ -38,8 +38,8 @@ class Game:
             self.pos_initialN[3]
         )
 
-    def addSol(self, x,y):
-        sol = Object(x,y)
+    def addSol(self, x,y,cheminImage):
+        sol = Object(x,y,cheminImage)
         self.mesSols.append(sol)
 
     def verifGravite(self):
@@ -83,7 +83,8 @@ class Game:
     def createSol(self):
         i = 0
         while i < 950:
-            self.addSol(i,450)
+            self.addSol(i,450,'images/objects/sol1.png')
+            self.addSol(i,510,'images/objects/sol2.png')
             i += 62
 
     def afficherSol(self, screen):

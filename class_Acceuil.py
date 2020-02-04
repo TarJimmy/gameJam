@@ -2,8 +2,14 @@ import pygame
 
 class VueAccueil:
     #Construteur de l'accueil
-    def __init__(self):
-#
+    def __init__(self, cheminImage):
+
+        RED = (255, 0, 0)
+        BLUE = (0, 0, 255)
+        COLORS = (RED, BLUE)
+
+
+        myfont=pygame.font.SysFont('Helvetic', 20)
         #Largeur de l'écran
         self.width = 800
         #Hauteur de l'écran
@@ -13,11 +19,17 @@ class VueAccueil:
         #Appliquer la taille de l'écran à l'attribut screen
         self.screen = pygame.display.set_mode((self.width,self.height))
         #background comprend l'image de fond
-        self.background = pygame.image.load('images/ciel.jpg')
+        self.background = pygame.image.load(chemin_image + 'ciel.jpg')
         #redimensionne l'image
         self.background = pygame.transform.scale(self.background,((self.width),self.height))
         #running est l'attribut ui précise si l'écran est activé
         self.running = False
+
+        clickable_area= pygame.Rect((100,100),(100,100))
+        rect_surf = pygame.Surface(clickable_area.size)
+        #continuer
+
+
 
     #fonction qui affiche l'acceuil
     def afficher(self):
@@ -37,12 +49,8 @@ class VueAccueil:
                     self.running = False
                     print("Fermeture de l'accueil")
 
+
 #A supprimer, c'est pour tester directement l'accueil
 pygame.init()
-<<<<<<< HEAD
-accueil = VueAccueil()
-accueil.afficher()
-=======
 acceuil = VueAccueil()
 acceuil.afficher()
->>>>>>> 5a45356ea47abd3f3e5674cbd8b36a87ab1deba5

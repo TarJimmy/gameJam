@@ -4,6 +4,8 @@ class Parametre:
         #pour affichage correct sur vidéo-projecteur
         self.widthMax = 1024
         self.heightMax = 768
+        
+        self.difficulte = 1
 
     def verifWidth(self,width):
         if (width < self.widthMax):
