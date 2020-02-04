@@ -50,9 +50,11 @@ class Game:
 
     def gravite(self):
         if(self.verifGravite()==False):
+            print("jy passe)")
             self.player.y += 7
             self.player.isJump = False
-
+        else:
+            print("jy passe pas")
     def plateaux(self,screen):
         screen.blit(self.bg[self.np], (0, 0))
 
@@ -84,4 +86,3 @@ class Game:
         self.changerPlateaux()
         self.afficherSol(screen)
         self.player.draw(screen)
-        print(self.np)

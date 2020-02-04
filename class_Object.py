@@ -1,7 +1,7 @@
 import pygame
 
 class Object(pygame.sprite.Sprite):
-    def __init__(self,x,y,Envers):
+    def __init__(self,x,y):
         super().__init__()
         self.image = pygame.image.load('images/joueur/sol1.png')
         self.rect = self.image.get_rect()
