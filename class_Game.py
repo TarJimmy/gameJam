@@ -1,6 +1,6 @@
 import pygame
 from class_Player import Player
-from class_Button import Button
+from class_Object import Object
 from class_Npc import Npc
 class Game:
     def __init__(self, pos_initialP, pos_initialN):
@@ -39,7 +39,7 @@ class Game:
         )
 
     def addSol(self, x,y,cheminImage):
-        sol = Button(x,y,cheminImage)
+        sol = Object(x,y,cheminImage)
         self.mesSols.append(sol)
 
     def verifGravite(self):

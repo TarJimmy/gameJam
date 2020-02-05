@@ -36,12 +36,3 @@ class Question:
                 i += 1
         else:
             print("Erreur dans le nombre")
-
-quest = Question()
-quest.recupQuestionNum(20)
-quest.recupQuestionNum(10)
-print(quest.question)
-print(quest.reponsesFausses)
-print(quest.reponseJuste)
-print(quest.solution)
-# quest.recupQuestNum(8)

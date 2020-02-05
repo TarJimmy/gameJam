@@ -25,7 +25,12 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            
+        elif event.type == pygame.MOUSEBUTTONUP: # quand je relache le bouton
+            if event.button == 1: # 1= clique gauche
+                for buttonCourant in game.mesSols:
+                    if buttonCourant.isClicked(event.pos):
+                        print("Je clique sur mon sol")
+
     if keys[pygame.K_LEFT]:
         game.player.move_left()
 
@@ -40,15 +45,7 @@ while running:
         else:
             game.gravite()
     else:
-        if game.player.jumpCount >= -7:
-            # neg = 1
-            # if game.player.jumpCount < 0:
-            #     neg = -1
-            game.player.y -= (game.player.jumpCount * abs(game.player.jumpCount)) * 0.5
-            game.player.jumpCount -= 1
-        else:
-            game.player.isJump = False
-            game.player.jumpCount = 7
+        game.player.doJump()
     game.actualiser(screen)
     pygame.display.flip()
 pygame.quit()
