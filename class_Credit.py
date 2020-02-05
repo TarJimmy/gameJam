@@ -35,8 +35,6 @@ class Credit:
         self.addRoles("Amine Benmansour", "Developpeur")
         self.addRoles("Lucas Zaetta", "Developpeur")
 
-        self.addSource("exemple", "unesource.com")
-        self.addSource("Exemple", "une deuxieme source.com")
 
     def addRoles(self,nom, roles):
         text = roles + " : " + nom

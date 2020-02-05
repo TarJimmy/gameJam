@@ -36,3 +36,7 @@ class Question:
                 i += 1
         else:
             print("Erreur dans le nombre")
+
+q=Question()
+q.recupQuestionNum(6)
+print(q.question)

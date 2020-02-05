@@ -1,14 +1,29 @@
 import pygame
+import math
 from class_Player import Player
 from class_Object import Object
 from class_Npc import Npc
+from class_Object import Object
 class Game:
-    def __init__(self, pos_initialP, pos_initialN):
+    def __init__(self, pos_initialP, pos_initialN, pos_initialO):
         cheminBackGround = 'images/backgrounds/'
         self.pos_initialP = pos_initialP
         self.pos_initialN = pos_initialN
+        self.pos_initialO = pos_initialO
+        cheminObject = 'images/objects/sol1.png'
         self.gravity = 2
         self.np = 0
+        #Variable pour détecter si player proche de npc
+        self.isNear = False
+        #Valeurs X et Y du champ texte
+        self.textX = 590
+        self.textY = 300
+        self.msg = "Hello, je suis ton père !"
+        self.font = pygame.font.Font('freesansbold.ttf',32)
+        #Pour vérifier qu'on peut toujours lancer le dialogue
+        self.lancementDialogue = False
+        #variable pour sauvegarder la position x du perso
+        self.save = 0
         #Ordre des backgrounds
         self.bg = [
             pygame.image.load(cheminBackGround + 'bg1.jpg'),
@@ -37,10 +52,50 @@ class Game:
             self.pos_initialN[2],
             self.pos_initialN[3]
         )
+        #generer un objet
+        self.object = Object(
+            self.pos_initialO[0],
+            self.pos_initialO[1],
+            cheminObject
+        )
 
     def addSol(self, x,y,cheminImage):
         sol = Object(x,y,cheminImage)
         self.mesSols.append(sol)
+
+    def isCollisionNpc(self):
+        distance = math.sqrt((math.pow(self.npc.x- self.player.x,2)) + (math.pow(self.npc.y - self.player.y,2)))
+        if distance < self.player.width:
+            return True
+        #100 > le player n'a pas le droit de sauter
+        elif distance < 100:
+            self.isNear = True
+            print("yoto")
+        else:
+            self.isNear = False
+
+    def show_dialog(self,x,y,screen):
+        texte = self.font.render(self.msg,True, (255,255,255))
+        screen.blit(texte, (x,y))
+
+    def blocage_affichage(self,screen):
+        if self.isCollisionNpc():
+            self.player.x = self.npc.x - self.player.width
+            self.save = self.player.x
+            self.lancementDialogue = True
+        if self.lancementDialogue and self.save == self.player.x :
+            self.show_dialog(self.textX,self.textY,screen)
+
+    # def isCollisionObject(self):
+    #     distance = math.sqrt((math.pow(self.object.rect.x- self.player.x,2)) + (math.pow(self.object.rect.y - self.player.y,2)))
+    #     if distance < self.player.width:
+    #         return True
+    #         print("alow")
+    #
+    # def collision_object(self):
+    #     if (self.player.x == self.object.rect.x) and (self.player.y + self.player.height) < self.object.rect.y:
+    #         self.player.y = self.object.rect.y - self.player.height
+    #         print("wola")
 
     def verifGravite(self):
         plateau11x = -30
@@ -97,3 +152,6 @@ class Game:
         self.afficherSol(screen)
         self.player.draw(screen)
         self.npc.draw(screen)
+        self.object.draw(screen)
+        self.blocage_affichage(screen)
+        # self.collision_object()

@@ -8,5 +8,8 @@ class Object(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+    def draw(self,window):
+        window.blit(self.image,(self.rect.x,self.rect.y))
+
     def redimensionne(self,width,height):
         self.image = pygame.transform.scale(self.image, (width,height))

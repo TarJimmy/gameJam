@@ -80,7 +80,6 @@ class VueAccueil:
                             if self.boutonJouer.isClicked(event.pos):
                                 print("Je clique sur boutonJouer")
                             if self.boutonCredit.isClicked(event.pos):
-                                print("Je clique sur boutonCrédit")
                                 credit = True
 
             pygame.display.flip()
