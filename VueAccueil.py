@@ -1,4 +1,5 @@
 import pygame
+from class_Button import Button
 
 class VueAccueil:
     #Construteur de l'accueil
@@ -25,29 +26,32 @@ class VueAccueil:
         # size = (50, 50)
         # rect_filled = pygame.Surface(size)
         # self.bouton = pygame.draw.rect(rect_filled, RED, rect_filled.get_rect())
-        self.bouton = pygame.image.load("images/joueur/L11E.png").convert_alpha()
-        # self.bouton_rect = pygame.Rect(200, 200, 64, 64) ## CONNAITRE LE RECTANGLE
-        self.bouton_rect = self.bouton.get_rect() ## CONNAITRE LE RECTANGLE
-        self.font = pygame.font.SysFont('helvetic', 70)
-        self.TEXT = 'Rien..'
-        self.rouge = (255,0,0)
+        # self.bouton = pygame.image.load("images/joueur/L11E.png").convert_alpha()
+        # # self.bouton_rect = pygame.Rect(200, 200, 64, 64) ## CONNAITRE LE RECTANGLE
+        # self.bouton_rect = self.bouton.get_rect() ## CONNAITRE LE RECTANGLE
+        # self.font = pygame.font.SysFont('helvetic', 70)
+        # self.TEXT = 'Rien..'
+        # self.rouge = (255,0,0)
+        self.boutonJouer = Button(100,200,"images/boutons/boutonJouer.gif")
+        self.boutonJouer.redimensionne(180,47)
 
 
 
-    def gerer_event(self):
-
-        ## Si le focus est sur la fenêtre.
-        if pygame.mouse.get_focused():
-            ## Trouve position de la souris
-            x, y = pygame.mouse.get_pos()
-
-            ## S'il y a collision:
-            collide = self.bouton_rect.collidepoint(x, y)
-
-            if collide:
-                print("Je suis dessus")
-            else:
-                print("Rien")
+    #
+    # def gerer_event(self):
+    #
+    #     ## Si le focus est sur la fenêtre.
+    #     if pygame.mouse.get_focused():
+    #         ## Trouve position de la souris
+    #         x, y = pygame.mouse.get_pos()
+    #
+    #         ## S'il y a collision:
+    #         collide = self.bouton_rect.collidepoint(x, y)
+    #
+    #         if collide:
+    #             print("Je suis dessus")
+    #         else:
+    #             print("Rien")
 
     #fonction qui affiche l'acceuil
     def afficher(self):
@@ -59,16 +63,16 @@ class VueAccueil:
             #Charge le background
             self.screen.blit(self.background, (0,0))
             #Met à jour l'écran
-            self.screen.blit(self.bouton, (200,200))
-            self.screen.blit(self.bouton, self.bouton_rect)
+            # self.screen.blit(self.bouton, (200,200))
+            # self.screen.blit(self.bouton, self.bouton_rect)
             # pygame.draw.rect(self.screen, self.rouge, self.bouton_rect)
-
+            self.screen.blit(self.boutonJouer.image, (self.boutonJouer.rect.x,self.boutonJouer.rect.y))
             # self.bouton.fill((255,20,0))
             # text = self.font.render(self.TEXT, 1, (255,255,255))
             # self.screen.blit(text, (50, 500))
 
             ## Gérer les événements.
-            accueil.gerer_event()
+            # accueil.gerer_event()
 
             pygame.display.flip()
 
@@ -78,13 +82,13 @@ class VueAccueil:
                 if event.type == pygame.QUIT:
                     self.running = False
                     print("Fermeture de l'accueil")
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    if event.button == 1:
+                        if self.boutonJouer.isClicked(event.pos):
+                            print("Je clique sur bouton")
+
 
 #A supprimer, c'est pour tester directement l'accueil
 pygame.init()
-<<<<<<< HEAD
 accueil = VueAccueil()
 accueil.afficher()
-=======
-acceuil = VueAccueil()
-acceuil.afficher()
->>>>>>> be6a6ce7b3849e06d2f1e7dd097f61127d25b21a

@@ -10,4 +10,4 @@ class Object(pygame.sprite.Sprite):
 
     def redimensionne(self,width,height):
         self.image = pygame.transform.scale(self.image, (width,height))
-        self.rect = self.image.get_rect()
+        # self.rect = self.image.get_rect()
