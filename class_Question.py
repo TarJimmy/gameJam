@@ -39,6 +39,7 @@ class Question:
 
 quest = Question()
 quest.recupQuestionNum(20)
+quest.recupQuestionNum(10)
 print(quest.question)
 print(quest.reponsesFausses)
 print(quest.reponseJuste)
