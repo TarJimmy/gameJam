@@ -19,7 +19,7 @@ screen = pygame.display.set_mode((param.verifWidth(960),param.verifHeight(568)))
 running = True
 game.createSol()
 pygame.display.set_caption("Earth Zero²")
-son= pygame.mixer.Sound("saut.wav")
+son= pygame.mixer.Sound("jump.wav")
 #boucle tant que cette condition est vrai
 while running:
     clock.tick(80)
