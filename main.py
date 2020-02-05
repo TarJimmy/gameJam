@@ -20,11 +20,11 @@ running = True
 game.createSol()
 pygame.display.set_caption("Earth Zero²")
 son= pygame.mixer.Sound("jumping.wav")
-sonfond=pygame.mixer.Sound("fond.wav")
+# sonfond=pygame.mixer.Sound("fond.wav")
 #boucle tant que cette condition est vrai
 while running:
     clock.tick(80)
-    sonfond.play(loops=-1, maxtime=0 , fade_ms=0)
+    # sonfond.play(loops=-1, maxtime=0 , fade_ms=0)
     keys = pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

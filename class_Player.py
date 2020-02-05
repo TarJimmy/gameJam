@@ -80,7 +80,7 @@ class Player(pygame.sprite.Sprite):
         self.walkCount = 0
 
     def doJump(self):
-        if self.jumpCount >= 0:
+        if self.jumpCount >= -self.hauteurSaut:
             self.y -= (self.jumpCount * abs(self.jumpCount)) * 0.5
             self.jumpCount -= 1
         else:
