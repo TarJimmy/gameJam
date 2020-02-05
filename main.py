@@ -18,6 +18,7 @@ screen = pygame.display.set_mode((param.verifWidth(960),param.verifHeight(568)))
 
 running = True
 game.createSol()
+pygame.display.set_caption("Earth Zero²")
 #boucle tant que cette condition est vrai
 while running:
     clock.tick(80)
@@ -25,7 +26,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+            
     if keys[pygame.K_LEFT]:
         game.player.move_left()
 

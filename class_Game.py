@@ -1,7 +1,7 @@
 import pygame
 import math
 from class_Player import Player
-from class_Object import Object
+from class_Button import Button
 from class_Npc import Npc
 class Game:
     def __init__(self, pos_initialP, pos_initialN, pos_initialO):
@@ -59,7 +59,7 @@ class Game:
         )
 
     def addSol(self, x,y,cheminImage):
-        sol = Object(x,y,cheminImage)
+        sol = Button(x,y,cheminImage)
         self.mesSols.append(sol)
 
     def isCollisionNpc(self):
@@ -139,7 +139,7 @@ class Game:
         while i < 950:
             self.addSol(i-3,450,'images/objects/sol1.png')
             self.addSol(i-3,510,'images/objects/sol2.png')
-            i += 62 
+            i += 62
 
     def afficherSol(self, screen):
         for solCourant in self.mesSols:
