@@ -1,36 +1,45 @@
 import pygame
 from class_Player import Player
-from class_Object import Object
+from class_Button import Button
+from class_Npc import Npc
 class Game:
-    def __init__(self, pos_initital):
-        cheminImage = 'images/joueur/'
-        self.pos_initital = pos_initital
+    def __init__(self, pos_initialP, pos_initialN):
+        cheminBackGround = 'images/backgrounds/'
+        self.pos_initialP = pos_initialP
+        self.pos_initialN = pos_initialN
         self.gravity = 2
         self.np = 0
         #Ordre des backgrounds
         self.bg = [
-            pygame.image.load(cheminImage + 'bg1.jpg'),
-            pygame.image.load(cheminImage + 'bg2.jpg'),
-            pygame.image.load(cheminImage + 'bg3.jpg'),
-            pygame.image.load(cheminImage + 'bg4.jpg'),
-            pygame.image.load(cheminImage + 'bg5.jpg'),
-            pygame.image.load(cheminImage + 'bg6.jpg'),
-            pygame.image.load(cheminImage + 'bg7.jpg'),
-            pygame.image.load(cheminImage + 'bg8.jpg'),
-            pygame.image.load(cheminImage + 'bg9.jpg'),
-            pygame.image.load(cheminImage + 'bg10.jpg')
+            pygame.image.load(cheminBackGround + 'bg1.jpg'),
+            pygame.image.load(cheminBackGround + 'bg2.jpg'),
+            pygame.image.load(cheminBackGround + 'bg3.jpg'),
+            pygame.image.load(cheminBackGround + 'bg4.jpg'),
+            pygame.image.load(cheminBackGround + 'bg5.jpg'),
+            pygame.image.load(cheminBackGround + 'bg6.jpg'),
+            pygame.image.load(cheminBackGround + 'bg7.jpg'),
+            pygame.image.load(cheminBackGround + 'bg8.jpg'),
+            pygame.image.load(cheminBackGround + 'bg9.jpg'),
+            pygame.image.load(cheminBackGround + 'bg10.jpg')
         ]
         #generer notre joueur
         self.player = Player(
-            self.pos_initital[0],
-            self.pos_initital[1],
-            self.pos_initital[2],
-            self.pos_initital[3]
+            self.pos_initialP[0],
+            self.pos_initialP[1],
+            self.pos_initialP[2],
+            self.pos_initialP[3]
             )
         self.mesSols = []
+        #generer notre npc
+        self.npc = Npc(
+            self.pos_initialN[0],
+            self.pos_initialN[1],
+            self.pos_initialN[2],
+            self.pos_initialN[3]
+        )
 
-    def addSol(self, x,y):
-        sol = Object(x,y)
+    def addSol(self, x,y,cheminImage):
+        sol = Button(x,y,cheminImage)
         self.mesSols.append(sol)
 
     def verifGravite(self):
@@ -52,6 +61,8 @@ class Game:
         if(self.verifGravite()==False):
             self.player.y += 7
             self.player.isJump = False
+        if(self.player.y>390):
+            self.player.y = 390
 
     def plateaux(self,screen):
         screen.blit(self.bg[self.np], (0, 0))
@@ -72,7 +83,8 @@ class Game:
     def createSol(self):
         i = 0
         while i < 950:
-            self.addSol(i,450)
+            self.addSol(i-3,450,'images/objects/sol1.png')
+            self.addSol(i-3,510,'images/objects/sol2.png')
             i += 62
 
     def afficherSol(self, screen):
@@ -84,4 +96,4 @@ class Game:
         self.changerPlateaux()
         self.afficherSol(screen)
         self.player.draw(screen)
-        print(self.np)
+        self.npc.draw(screen)

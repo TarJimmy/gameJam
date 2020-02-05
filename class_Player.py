@@ -4,6 +4,8 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self, x, y, width, height):
         super().__init__()
+        self.oxygeneMax = 100
+        self.oxygene = 100
         self.x = x
         self.y = y
         self.width = width
@@ -14,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.left = False
         self.right = False
         self.walkCount = 0
-        cheminImage = "images/joueur/"
+        cheminImage = "images/player/"
         self.walkRight = [
             pygame.image.load(cheminImage+'R1.png'),
             pygame.image.load(cheminImage+'R2.png'),
