@@ -35,6 +35,8 @@ class Credit:
         self.addRoles("Amine Benmansour", "Developpeur")
         self.addRoles("Lucas Zaetta", "Developpeur")
 
+        self.addSource("Images joueur", "machin database.com")
+
 
     def addRoles(self,nom, roles):
         text = roles + " : " + nom
