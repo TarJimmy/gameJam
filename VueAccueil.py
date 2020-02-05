@@ -1,6 +1,6 @@
 import pygame
 from class_Button import Button
-
+from class_Credit import Credit
 class VueAccueil:
     #Construteur de l'accueil
 
@@ -38,24 +38,7 @@ class VueAccueil:
         self.boutonCredit.redimensionne(180,47)
         self.logo = Button(275,10,"images/boutons/logo.png")
         self.logo.redimensionne(230,200)
-
-
-
-    #
-    # def gerer_event(self):
-    #
-    #     ## Si le focus est sur la fenêtre.
-    #     if pygame.mouse.get_focused():
-    #         ## Trouve position de la souris
-    #         x, y = pygame.mouse.get_pos()
-    #
-    #         ## S'il y a collision:
-    #         collide = self.bouton_rect.collidepoint(x, y)
-    #
-    #         if collide:
-    #             print("Je suis dessus")
-    #         else:
-    #             print("Rien")
+        self.credit = Credit()
 
     #fonction qui affiche l'acceuil
     def afficher(self):
@@ -63,38 +46,44 @@ class VueAccueil:
         #Met l'attribut d'affichage à True
         self.running = True
         #Tant qu'on continue à afficher la fenetre
+        credit = False
         while self.running:
-            #Charge le background
-            self.screen.blit(self.background, (0,0))
-            #Met à jour l'écran
-            # self.screen.blit(self.bouton, (200,200))
-            # self.screen.blit(self.bouton, self.bouton_rect)
-            # pygame.draw.rect(self.screen, self.rouge, self.bouton_rect)
-            self.screen.blit(self.boutonJouer.image, (self.boutonJouer.rect.x,self.boutonJouer.rect.y))
-            self.screen.blit(self.boutonCredit.image, (self.boutonCredit.rect.x,self.boutonCredit.rect.y))
-            self.screen.blit(self.logo.image, (self.logo.rect.x,self.logo.rect.y))
-            # self.bouton.fill((255,20,0))
-            # text = self.font.render(self.TEXT, 1, (255,255,255))
-            # self.screen.blit(text, (50, 500))
+            if credit:
+                self.screen = pygame.display.set_mode((self.credit.width,self.credit.height))
+                #Affiche le titre des roles
+                self.credit.afficher(self.screen)
+                for event in pygame.event.get():
+                    # si l'evenement est fermeture de fenetre
+                    if event.type == pygame.QUIT:
+                        self.running = False
+                    elif event.type == pygame.MOUSEBUTTONUP: # quand je relache le bouton
+                        if event.button == 1: # 1= clique gauche
+                            if self.credit.buttonBack.isClicked(event.pos):
+                                credit = False
 
-            ## Gérer les événements.
-            # accueil.gerer_event()
+            else:
+                self.screen = pygame.display.set_mode((self.width,self.height))
+                #Charge le background
+                self.screen.blit(self.background, (0,0))
+                #Met à jour l'écran
+                self.screen.blit(self.boutonJouer.image, (self.boutonJouer.rect.x,self.boutonJouer.rect.y))
+                self.screen.blit(self.boutonCredit.image, (self.boutonCredit.rect.x,self.boutonCredit.rect.y))
+                self.screen.blit(self.logo.image, (self.logo.rect.x,self.logo.rect.y))
+
+                #Parcours tous les évenements possibles
+                for event in pygame.event.get():
+                    # si l'evenement est fermeture de fenetre
+                    if event.type == pygame.QUIT:
+                        self.running = False
+                    elif event.type == pygame.MOUSEBUTTONUP:
+                        if event.button == 1:
+                            if self.boutonJouer.isClicked(event.pos):
+                                print("Je clique sur boutonJouer")
+                            if self.boutonCredit.isClicked(event.pos):
+                                print("Je clique sur boutonCrédit")
+                                credit = True
 
             pygame.display.flip()
-
-            #Parcours tous les évenements possibles
-            for event in pygame.event.get():
-                # si l'evenement est fermeture de fenetre
-                if event.type == pygame.QUIT:
-                    self.running = False
-                    print("Fermeture de l'accueil")
-                elif event.type == pygame.MOUSEBUTTONUP:
-                    if event.button == 1:
-                        if self.boutonJouer.isClicked(event.pos):
-                            print("Je clique sur boutonJouer")
-                        if self.boutonCredit.isClicked(event.pos):
-                            print("Je clique sur boutonCrédit")
-
 
 #A supprimer, c'est pour tester directement l'accueil
 pygame.init()
