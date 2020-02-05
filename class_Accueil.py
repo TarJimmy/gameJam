@@ -1,12 +1,11 @@
 import pygame
 from class_Button import Button
 from class_Credit import Credit
-class VueAccueil:
+class Accueil:
     #Construteur de l'accueil
 
 
     def __init__(self):
-#
         #Largeur de l'écran
         self.width = 800
         #Hauteur de l'écran
@@ -47,6 +46,7 @@ class VueAccueil:
         self.running = True
         #Tant qu'on continue à afficher la fenetre
         credit = False
+        continu = True
         while self.running:
             if credit:
                 self.screen = pygame.display.set_mode((self.credit.width,self.credit.height))
@@ -56,6 +56,7 @@ class VueAccueil:
                     # si l'evenement est fermeture de fenetre
                     if event.type == pygame.QUIT:
                         self.running = False
+                        continu = False
                     elif event.type == pygame.MOUSEBUTTONUP: # quand je relache le bouton
                         if event.button == 1: # 1= clique gauche
                             if self.credit.buttonBack.isClicked(event.pos):
@@ -75,16 +76,12 @@ class VueAccueil:
                     # si l'evenement est fermeture de fenetre
                     if event.type == pygame.QUIT:
                         self.running = False
+                        continu = False
                     elif event.type == pygame.MOUSEBUTTONUP:
                         if event.button == 1:
                             if self.boutonJouer.isClicked(event.pos):
-                                print("Je clique sur boutonJouer")
+                                self.running = False
                             if self.boutonCredit.isClicked(event.pos):
                                 credit = True
-
             pygame.display.flip()
-
-#A supprimer, c'est pour tester directement l'accueil
-pygame.init()
-accueil = VueAccueil()
-accueil.afficher()
+        return continu

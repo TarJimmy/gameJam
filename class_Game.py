@@ -13,6 +13,8 @@ class Game:
         cheminObject = 'images/objects/sol1.png'
         self.gravity = 2
         self.np = 0
+        self.width = 960
+        self.height = 568
         #Variable pour détecter si player proche de npc
         self.isNear = False
         #Valeurs X et Y du champ texte
