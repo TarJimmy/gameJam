@@ -7,16 +7,32 @@ from class_Histoire import Histoire
 class Game:
     def __init__(self, pos_initialP, pos_initialN, pos_initialO):
         cheminBackGround = 'images/backgrounds/'
+        cheminObject = 'images/objects/sol1.png'
+        self.maps = []
+        self.formatsMaps = []
+        self.mapCourant = None
+        #Mesure du temps
+        self.frame_count = 0
+        self.frame_rate = 60
+        #Temps original
+        self.start_time = 90
+        #Position initial du perso
         self.pos_initialP = pos_initialP
         self.pos_initialN = pos_initialN
         self.pos_initialO = pos_initialO
-        cheminObject = 'images/objects/sol1.png'
+        #Force de la gravité
         self.gravity = 2
+        #Numéro du background
         self.np = 0
+        #Largeur de l'écran
         self.width = 960
+        #Hauteur de l'écran
         self.height = 568
+        #Classe pour raconter l'histoire du jeu
         self.histoire = Histoire()
+        #Numéro de l'histoire courante
         self.numHistoire = 1
+        #Le numero de page à été modifié (sert pour laffichage de l'histoire)
         self.npModif = False
         #Variable pour détecter si player proche de npc
         self.isNear = False
@@ -63,12 +79,52 @@ class Game:
             self.pos_initialO[1],
             cheminObject
         )
+
     def afficherHistoire(self, screen):
         self.histoire.afficher(screen,self.numHistoire)
 
     def addSol(self, x,y,cheminImage):
         sol = Object(x,y,cheminImage)
         self.mesSols.append(sol)
+
+    def addFormatMap(self,map):
+        self.formatsMaps.append(map)
+    #Crée toutes les formations de maps
+    def createFormatMap(self):
+        map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        self.addFormatMap(map)
+        print(self.formatsMaps)
+    #Initialise toutes les maps (en créant les blocs associé)
+    def initMap(self):
+        self.createFormatMap()
+        y = -35
+        i = 0
+        tab2 = []
+        for tab in self.formatsMaps:
+            tab2.clear()
+            for ligne in tab:
+                x = -30
+                y+= 60
+                for solCourant in ligne:
+                    x += 62
+                    if solCourant == 1:
+                        sol = Object(x,y,"images/objects/plateau1.png")
+                        tab2.append(sol)
+            self.maps.append(tab2)
+        print(self.maps)
+    #Affiche la map séléctionné
+    def afficherMap(self, screen):
+        recupMap = self.maps[1]
+        for solCourant in recupMap:
+            screen.blit(solCourant.image,(solCourant.rect.x,solCourant.rect.y))
 
     def isCollisionNpc(self):
         distance = math.sqrt((math.pow(self.npc.x- self.player.x,2)) + (math.pow(self.npc.y - self.player.y,2)))
@@ -77,7 +133,6 @@ class Game:
         #100 > le player n'a pas le droit de sauter
         elif distance < 100:
             self.isNear = True
-            print("yoto")
         else:
             self.isNear = False
 
@@ -142,21 +197,11 @@ class Game:
         if self.player.x < -20 and self.np == 0:
             self.player.x = 15
             self.player.y = 390
-    def createSol(self):
-        i = 0
-        while i < 950:
-            self.addSol(i-3,450,'images/objects/sol1.png')
-            self.addSol(i-3,510,'images/objects/sol2.png')
-            i += 62
-
-    def afficherSol(self, screen):
-        for solCourant in self.mesSols:
-            screen.blit(solCourant.image,(solCourant.rect.x,solCourant.rect.y))
 
     def actualiser(self, screen):
         self.plateaux(screen)
         self.changerPlateaux()
-        self.afficherSol(screen)
+        self.afficherMap(screen)
         self.player.draw(screen)
         # self.npc.draw(screen)
         # self.object.draw(screen)

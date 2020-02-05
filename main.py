@@ -11,6 +11,7 @@ pos_initialN = [700, 395, 40, 60]
 pos_initialO = [100, 420]
 #creer l'unique objet jeu, le joueur et le npc font partie du jeu
 game = Game(pos_initialP,pos_initialN,pos_initialO)
+game.initMap()
 #Variable en fonction que ce que l'on doit afficher
 
 #cree l'unique objet parametre
@@ -20,7 +21,6 @@ acceuil = Accueil()
 continu = acceuil.afficher()
 if continu:
     running = True
-    game.createSol()
     pygame.display.set_caption("Earth Zero²")
     son= pygame.mixer.Sound("jumping.wav")
     sonfond=pygame.mixer.Sound("fond.wav")
