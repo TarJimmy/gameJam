@@ -38,7 +38,7 @@ class Question:
             print("Erreur dans le nombre")
 
 quest = Question()
-quest.recupQuestionNum(10)
+quest.recupQuestionNum(20)
 print(quest.question)
 print(quest.reponsesFausses)
 print(quest.reponseJuste)
