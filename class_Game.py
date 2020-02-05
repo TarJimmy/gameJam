@@ -3,6 +3,7 @@ import math
 from class_Player import Player
 from class_Button import Button
 from class_Npc import Npc
+from class_Object import Object
 class Game:
     def __init__(self, pos_initialP, pos_initialN, pos_initialO):
         cheminBackGround = 'images/backgrounds/'
@@ -53,9 +54,9 @@ class Game:
         )
         #generer un objet
         self.object = Object(
-        self.pos_initialO[0],
-        self.pos_initialO[1],
-        cheminObject
+            self.pos_initialO[0],
+            self.pos_initialO[1],
+            cheminObject
         )
 
     def addSol(self, x,y,cheminImage):
