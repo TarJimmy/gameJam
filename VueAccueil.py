@@ -81,5 +81,10 @@ class VueAccueil:
 
 #A supprimer, c'est pour tester directement l'accueil
 pygame.init()
+<<<<<<< HEAD
 accueil = VueAccueil()
 accueil.afficher()
+=======
+acceuil = VueAccueil()
+acceuil.afficher()
+>>>>>>> be6a6ce7b3849e06d2f1e7dd097f61127d25b21a
