@@ -32,8 +32,12 @@ class VueAccueil:
         # self.font = pygame.font.SysFont('helvetic', 70)
         # self.TEXT = 'Rien..'
         # self.rouge = (255,0,0)
-        self.boutonJouer = Button(100,200,"images/boutons/boutonJouer.gif")
+        self.boutonJouer = Button(100,250,"images/boutons/boutonJouer.gif")
         self.boutonJouer.redimensionne(180,47)
+        self.boutonCredit = Button(500,250,"images/boutons/boutonCredit.gif")
+        self.boutonCredit.redimensionne(180,47)
+        self.logo = Button(275,10,"images/boutons/logo.png")
+        self.logo.redimensionne(230,200)
 
 
 
@@ -67,6 +71,8 @@ class VueAccueil:
             # self.screen.blit(self.bouton, self.bouton_rect)
             # pygame.draw.rect(self.screen, self.rouge, self.bouton_rect)
             self.screen.blit(self.boutonJouer.image, (self.boutonJouer.rect.x,self.boutonJouer.rect.y))
+            self.screen.blit(self.boutonCredit.image, (self.boutonCredit.rect.x,self.boutonCredit.rect.y))
+            self.screen.blit(self.logo.image, (self.logo.rect.x,self.logo.rect.y))
             # self.bouton.fill((255,20,0))
             # text = self.font.render(self.TEXT, 1, (255,255,255))
             # self.screen.blit(text, (50, 500))
@@ -85,7 +91,9 @@ class VueAccueil:
                 elif event.type == pygame.MOUSEBUTTONUP:
                     if event.button == 1:
                         if self.boutonJouer.isClicked(event.pos):
-                            print("Je clique sur bouton")
+                            print("Je clique sur boutonJouer")
+                        if self.boutonCredit.isClicked(event.pos):
+                            print("Je clique sur boutonCrédit")
 
 
 #A supprimer, c'est pour tester directement l'accueil

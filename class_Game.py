@@ -1,7 +1,7 @@
 import pygame
 import math
 from class_Player import Player
-from class_Button import Button
+from class_Object import Object
 from class_Npc import Npc
 from class_Object import Object
 class Game:
@@ -60,7 +60,7 @@ class Game:
         )
 
     def addSol(self, x,y,cheminImage):
-        sol = Button(x,y,cheminImage)
+        sol = Object(x,y,cheminImage)
         self.mesSols.append(sol)
 
     def isCollisionNpc(self):
