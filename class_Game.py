@@ -3,7 +3,7 @@ import math
 from class_Player import Player
 from class_Object import Object
 from class_Npc import Npc
-from class_Object import Object
+from class_Histoire import Histoire
 class Game:
     def __init__(self, pos_initialP, pos_initialN, pos_initialO):
         cheminBackGround = 'images/backgrounds/'
@@ -15,6 +15,9 @@ class Game:
         self.np = 0
         self.width = 960
         self.height = 568
+        self.histoire = Histoire()
+        self.numHistoire = 1
+        self.npModif = False
         #Variable pour détecter si player proche de npc
         self.isNear = False
         #Valeurs X et Y du champ texte
@@ -60,6 +63,8 @@ class Game:
             self.pos_initialO[1],
             cheminObject
         )
+    def afficherHistoire(self, screen):
+        self.histoire.afficher(screen,self.numHistoire)
 
     def addSol(self, x,y,cheminImage):
         sol = Object(x,y,cheminImage)
@@ -107,11 +112,11 @@ class Game:
         if (plateau11x <= self.player.x and plateau12x >= self.player.x):
             i = 0
             #Verifier que le joueur est sur un sol
-            while i < len(self.mesSols):
-                solCourant = self.mesSols[i]
-                if solCourant.rect.y - self.player.height - self.player.velocity <= self.player.y:
-                    return True
-                i += 1
+            # for solCourant in self.
+            #     solCourant = self.mesSols[i]
+            #     if solCourant.rect.y - self.player.height - self.player.velocity <= self.player.y:
+            #         return True
+            #     i += 1
             return False
 
     def gravite(self):
@@ -129,6 +134,7 @@ class Game:
             self.np += 1
             self.player.x = -15
             self.player.y = 390
+            self.npModif = True
         if self.player.x < -20 and self.np > 0:
             self.np -= 1
             self.player.x = 930
@@ -136,7 +142,6 @@ class Game:
         if self.player.x < -20 and self.np == 0:
             self.player.x = 15
             self.player.y = 390
-
     def createSol(self):
         i = 0
         while i < 950:
@@ -153,7 +158,7 @@ class Game:
         self.changerPlateaux()
         self.afficherSol(screen)
         self.player.draw(screen)
-        self.npc.draw(screen)
-        self.object.draw(screen)
-        self.blocage_affichage(screen)
+        # self.npc.draw(screen)
+        # self.object.draw(screen)
+        # self.blocage_affichage(screen)
         # self.collision_object()

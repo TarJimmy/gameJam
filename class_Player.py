@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.y = y
         self.width = width
         self.height = height
-        self.velocity = 5
+        self.velocity = 15
         self.isJump = False
         self.jumpCount = self.hauteurSaut
         self.left = False

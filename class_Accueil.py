@@ -47,6 +47,7 @@ class Accueil:
         #Tant qu'on continue à afficher la fenetre
         credit = False
         continu = True
+        
         while self.running:
             if credit:
                 self.screen = pygame.display.set_mode((self.credit.width,self.credit.height))
