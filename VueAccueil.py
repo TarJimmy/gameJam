@@ -1,5 +1,6 @@
 import pygame
 from class_Button import Button
+from class_Credit import Credit
 
 class VueAccueil:
     #Construteur de l'accueil
@@ -39,7 +40,17 @@ class VueAccueil:
         self.logo = Button(275,10,"images/boutons/logo.png")
         self.logo.redimensionne(230,200)
 
+        self.credit = Credit(self.screen)
 
+    def initCredit():
+        self.credit.addRoles("Saint-Laurent-Cyr Mark-Olivier", "Game Designer")
+        self.credit.addRoles("Jimmy Tardy", "Developpeur")
+        self.credit.addRoles("Cesar Watrin", "Developpeur")
+        self.credit.addRoles("Amine Benmansour", "Developpeur")
+        self.credit.addRoles("Lucas Zaetta", "Developpeur")
+
+        self.credit.addSource("exemple", "unesource.com")
+        self.credit.addSource("Exemple", "une deuxieme source.com")
 
     #
     # def gerer_event(self):
@@ -94,6 +105,7 @@ class VueAccueil:
                             print("Je clique sur boutonJouer")
                         if self.boutonCredit.isClicked(event.pos):
                             print("Je clique sur boutonCrédit")
+                            self.credit.afficher()
 
 
 #A supprimer, c'est pour tester directement l'accueil
