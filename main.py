@@ -19,6 +19,7 @@ screen = pygame.display.set_mode((param.verifWidth(960),param.verifHeight(568)))
 running = True
 game.createSol()
 pygame.display.set_caption("Earth Zero²")
+son= pygame.mixer.Sound("saut.wav")
 #boucle tant que cette condition est vrai
 while running:
     clock.tick(80)
@@ -39,6 +40,7 @@ while running:
         #Si la touche espace est enfoncée et si le player n'est pas proche du npc
         if keys[pygame.K_SPACE] and not (game.isNear):
             game.player.jump()
+            son.play()
         else:
             game.gravite()
     else:
