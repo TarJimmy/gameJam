@@ -35,9 +35,10 @@ while continu:
     screen = pygame.display.set_mode((game.width,game.height))
     #Variable en fonction que ce que l'on doit afficher
     MomentHistoire = True
+    retourAccueil = False
     if continu:
         #boucle tant que cette condition est vrai
-        while running:
+        while running and retourAccueil==False:
             if MomentHistoire == True:
                 game.afficherHistoire(screen)
                 for event in pygame.event.get():
@@ -50,6 +51,11 @@ while continu:
                                 MomentHistoire = False
                                 game.numHistoire +=1
                                 game.npModif = False
+                                if game.np==(game.nbBg-1):
+                                    retourAccueil = True
+            elif retourAccueil:
+                if not MomentHistoire:
+                    running = False
             else:
                 #Affiche le jeu
                 clock.tick(30)
@@ -81,7 +87,7 @@ while continu:
 
 
                 game.actualiser(screen)
-                if game.np==3 and game.npModif==True or game.np==10:
+                if game.np==7 and game.npModif==True or game.np==(game.nbBg-1):
                     MomentHistoire = True
             if game.lancementDialogue:
                 for event in pygame.event.get():
@@ -100,6 +106,4 @@ while continu:
                                     print("Mauvaise réponse")
 
             pygame.display.flip()
-            if (game.np==game.nbBg ):
-                running=False
 pygame.quit()
