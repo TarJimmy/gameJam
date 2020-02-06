@@ -82,10 +82,7 @@ class Game:
             )
         self.mesSols = []
         #generer notre npc
-        self.npc = Npc(
-            self.pos_initialN[0],
-            self.pos_initialN[1]
-        )
+        self.mesNpc = []
         #generer un objet
         # self.object = Object(
         #     self.pos_initialO[0],
@@ -113,7 +110,7 @@ class Game:
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-                 [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0],
+                 [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 3, 0, 1, 0],
                  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.addFormatMap(map)
@@ -190,7 +187,11 @@ class Game:
         map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+<<<<<<< HEAD
                  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+=======
+                 [0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+>>>>>>> 1b33bca2e9caa75410b3ce3a0b1be511a1dfd5be
                  [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -228,9 +229,10 @@ class Game:
                         oxygene = Oxygene(x ,y - 41)
                         tab.append(sol)
                         tab.append(oxygene)
-                    # if numCourant == 3:
-                    #     sol1 = Object(x,y,"images/objects/sol1.png")
-                    #     tab.append(sol1)
+                    if numCourant ==3:
+                        sol = Object(x,y,"images/objects/plateau1.png")
+                        self.mesNpc.append(Npc(x,y-40))
+                        tab.append(sol)
             self.maps.append(tab)
         self.mapCourante = self.maps[0]
     #Affiche la map séléctionné
@@ -240,7 +242,7 @@ class Game:
             screen.blit(solCourant.image,(solCourant.rect.x,solCourant.rect.y))
 
     def isCollisionNpc(self):
-        distance = math.sqrt((math.pow(self.npc.x- self.player.x,2)) + (math.pow(self.npc.y - self.player.y,2)))
+        distance = math.sqrt((math.pow(self.mesNpc[self.np].x- self.player.x,2)) + (math.pow(self.mesNpc[self.np].y - self.player.y,2)))
         if distance < self.player.width:
             return True
         #100 > le player n'a pas le droit de sauter
@@ -263,7 +265,7 @@ class Game:
 
     def blocage(self):
         if self.isCollisionNpc():
-            self.player.x = self.npc.x - self.player.width
+            self.player.x = self.mesNpc[self.np].x - self.player.width
             self.save = self.player.x
             self.lancementDialogue = True
 
@@ -373,24 +375,18 @@ class Game:
                 self.player.falling = False
                 return True
         return False
-
     def do(self):
         self.testCollision(self.player)
         self.afficherMap()
 
     def actualiser(self, screen):
-        W, H = 1000, 500
-        HW, HH = W / 2, H / 2
-        AREA = W * H
-        BLACK = (0, 0, 0, 255)
-        WHITE = (0, 255, 0, 255)
         self.plateaux(screen)
         self.changerPlateaux()
         self.afficherMap(screen)
         self.testCollision()
         self.player.do(self)
         self.player.draw(screen)
-        self.npc.draw(screen)
+        self.mesNpc[self.np].draw(screen)
         # self.object.draw(screen)
         self.isCollisionNpc()
         self.blocage()
