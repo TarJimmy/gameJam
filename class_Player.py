@@ -6,7 +6,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         #Gere la hauteur du saut
         self.hauteurSaut = 7
-        self.oxygene = 20
+        self.oxygene = 1000
         self.x = x
         self.y = y
         self.width = width
