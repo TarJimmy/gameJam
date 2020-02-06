@@ -59,7 +59,6 @@ while continu:
                     if event.type == pygame.QUIT:
                         running = False
                         continu = False
-
                 # if keys[pygame.K_LEFT]:
                 #     game.player.move_left()
                 #
