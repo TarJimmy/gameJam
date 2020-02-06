@@ -18,6 +18,7 @@ class Game:
         self.colorText = pygame.Color(255,255,255)
         self.maps = []
         self.formatsMaps = []
+        self.mesOxygene = []
         #Mesure du temps
         self.frame_count = 0
         self.frame_rate = 60
@@ -117,10 +118,10 @@ class Game:
     def createFormatMap(self):
         map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
-                 [0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1],
+                 [1, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 1],
+                 [0, 0, 0, 1, 0, 2, 0, 3, 0, 0, 1, 0, 0, 0, 1, 1],
                  [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 3, 0, 1],
-                 [0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                 [0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1],
                  [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0],
                  [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
@@ -130,9 +131,9 @@ class Game:
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0],
-                 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+                 [0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0],
+                 [1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0],
+                 [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
                  [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0]]
         self.addFormatMap(map)
         map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -223,6 +224,7 @@ class Game:
         for mapCourante in self.formatsMaps:
             y = -35
             tab = []
+            mesOxygenes = []
             for ligne in mapCourante:
                 x = -30
                 y+= 60
@@ -242,11 +244,11 @@ class Game:
                         tab.append(sol)
             self.maps.append(tab)
         self.mapCourante = self.maps[0]
+
     #Affiche la map séléctionné
     def afficherMap(self, screen):
-
         for solCourant in self.mapCourante:
-            screen.blit(solCourant.image,(solCourant.rect.x,solCourant.rect.y))
+            solCourant.draw(screen)
 
     def isCollisionNpc(self):
         distance = math.sqrt((math.pow(self.mesNpc[self.np].x- self.player.x,2)) + (math.pow(self.mesNpc[self.np].y - self.player.y,2)))
@@ -375,14 +377,19 @@ class Game:
     def testCollision(self):
         if not self.player.falling: return False
         for solCourant in self.mapCourante:
-            # print(solCourant)
+                # print(solCourant)
             result = solCourant.test(self.player)
-            # print(result)
-            if result:
-                self.player.currentPlatform = result
-                self.player.y = result.y
-                self.player.falling = False
-                return True
+            if solCourant.type == "object":
+                # print(result)
+                if result:
+                    self.player.currentPlatform = result
+                    self.player.y = result.y
+                    self.player.falling = False
+                    return True
+            elif solCourant.type == "oxygene":
+                if result:
+                    self.player.oxygene += solCourant.bonus
+                    solCourant.end = True
         return False
     def do(self):
         self.testCollision(self.player)

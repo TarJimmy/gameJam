@@ -24,7 +24,6 @@ class Player(pygame.sprite.Sprite):
         self.jumping = False
 
 
-
         cheminImage = "images/player/"
         self.walkRight = [
             pygame.image.load(cheminImage+'R1.png'),
