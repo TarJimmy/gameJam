@@ -99,7 +99,7 @@ class Player(pygame.sprite.Sprite):
             if self.jumpCounter == self.maxJumpRange:
                 self.jumping = False
                 self.falling = True
-                self.oxygene -= 10
+                self.oxygene -= 50
         elif self.falling:
             self.y += self.velocity
 

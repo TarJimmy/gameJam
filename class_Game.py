@@ -121,8 +121,8 @@ class Game:
         map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [1, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 1],
-                 [0, 0, 0, 1, 0, 2, 0, 3, 0, 0, 1, 0, 0, 0, 1, 1],
-                 [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 3, 0, 1],
+                 [0, 0, 0, 1, 0, 0, 1, 3, 0, 0, 1, 0, 0, 0, 1, 1],
+                 [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1],
                  [0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1],
                  [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0],
                  [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -375,7 +375,7 @@ class Game:
             self.player.x = 15
             # self.player.y = 390
         if self.player.y > 568:
-            self.player.oxygene -= 100
+            self.player.oxygene -= 250
             self.player.x = self.pos_initialP[0]
             self.player.y = self.pos_initialP[1]
 
@@ -384,17 +384,15 @@ class Game:
         for solCourant in self.mapCourante:
                 # print(solCourant)
             result = solCourant.test(self.player)
-            if solCourant.type == "object":
-                # print(result)
-                if result:
-                    self.player.currentPlatform = result
-                    self.player.y = result.y
-                    self.player.falling = False
-                    return True
-            elif solCourant.type == "oxygene":
-                if result:
-                    self.player.oxygene += solCourant.bonus
-                    solCourant.end = True
+            if result:
+                if solCourant.type == "object":
+                        self.player.currentPlatform = result
+                        self.player.y = result.y
+                        self.player.falling = False
+                        return True
+                elif solCourant.type == "oxygene" and solCourant.end == False:
+                        self.player.oxygene += solCourant.bonus
+                        solCourant.end = True
         return False
     def do(self):
         self.testCollision(self.player)
