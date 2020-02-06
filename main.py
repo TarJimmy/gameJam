@@ -27,51 +27,56 @@ while continu:
     screen = pygame.display.set_mode((game.width,game.height))
     #Variable en fonction que ce que l'on doit afficher
     MomentHistoire = True
-
-    #boucle tant que cette condition est vrai
-    while running:
-        if MomentHistoire == True:
-            game.afficherHistoire(screen)
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                    continu = False
-                elif event.type == pygame.MOUSEBUTTONUP: # quand je relache le bouton
-                    if event.button == 1: # 1= clique gauche
-                        if game.histoire.buttonNext.isClicked(event.pos):
-                            MomentHistoire = False
-                            game.numHistoire +=1
-                            game.npModif = False
-        else:
-            #Affiche le jeu
-            clock.tick(80)
-            sonfond.play(loops=-1, maxtime=0 , fade_ms=0)
-            keys = pygame.key.get_pressed()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                    continu = False
-            if keys[pygame.K_LEFT]:
-                game.player.move_left()
-
-            elif keys[pygame.K_RIGHT]:
-                game.player.move_right()
+    if continu:
+        #boucle tant que cette condition est vrai
+        while running:
+            if MomentHistoire == True:
+                game.afficherHistoire(screen)
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        running = False
+                        continu = False
+                    elif event.type == pygame.MOUSEBUTTONUP: # quand je relache le bouton
+                        if event.button == 1: # 1= clique gauche
+                            if game.histoire.buttonNext.isClicked(event.pos):
+                                MomentHistoire = False
+                                game.numHistoire +=1
+                                game.npModif = False
             else:
-                game.player.no_move()
+                #Affiche le jeu
+                clock.tick(40)
+                sonfond.play(loops=-1, maxtime=0 , fade_ms=0)
+                keys = pygame.key.get_pressed()
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        running = False
+                        continu = False
 
-            if not (game.player.isJump):
-                #Si la touche espace est enfoncée et si le player n'est pas proche du npc
-                if keys[pygame.K_SPACE] and not (game.isNear):
-                    game.player.jump()
-                    son.play()
-                else:
-                    game.gravite()
-            else:
-                game.player.doJump()
-            game.actualiser(screen)
-            if game.np==3 and game.npModif==True or game.np==10:
-                MomentHistoire = True
-        pygame.display.flip()
-        if (game.np==game.nbBg ):
-            running=False
+                # if keys[pygame.K_LEFT]:
+                #     game.player.move_left()
+                #
+                # elif keys[pygame.K_RIGHT]:
+                #     game.player.move_right()
+                # else:
+                #     game.player.no_move()
+                #
+                # if not (game.player.isJump):
+                #     #Si la touche espace est enfoncée et si le player n'est pas proche du npc
+                #     if keys[pygame.K_SPACE] and not (game.isNear):
+                #         game.player.jump()
+                #         son.play()
+                #     else:
+                #         game.gravite()
+                # else:
+                #     game.player.doJump()
+
+                # game.player.do()
+
+
+                game.actualiser(screen)
+                if game.np==3 and game.npModif==True or game.np==10:
+                    MomentHistoire = True
+            pygame.display.flip()
+            if (game.np==game.nbBg ):
+                running=False
 pygame.quit()

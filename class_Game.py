@@ -1,5 +1,5 @@
 import pygame
-import math
+import math, random, sys
 from class_Player import Player
 from class_Object import Object
 from class_Npc import Npc
@@ -204,10 +204,23 @@ class Game:
             self.player.y = 390
 
     def actualiser(self, screen):
+        W, H = 1000, 500
+        HW, HH = W / 2, H / 2
+        AREA = W * H
+        BLACK = (0, 0, 0, 255)
+        WHITE = (0, 255, 0, 255)
         self.plateaux(screen)
         self.changerPlateaux()
         self.afficherMap(screen)
+        self.player.do()
         self.player.draw(screen)
+        PLATFORMS = self.player.platforms()
+        PLATFORMS.add(self.player.platform(0, H - 10, W))
+        PLATFORMS.add(self.player.platform(200, 400, 100))
+        PLATFORMS.add(self.player.platform(300, 300, 100))
+        # for i in range(0, 50):
+        # 	PLATFORMS.add(self.player.platform(random.randint(0, W - 50), random.randint(50, H - 60), 50))
+        PLATFORMS.do(self.player)
         # self.npc.draw(screen)
         # self.object.draw(screen)
         # self.blocage_affichage(screen)
