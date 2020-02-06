@@ -93,7 +93,7 @@ while continu:
                                 print(game.buttons[0].rect.x)
                                 print(game.buttons[0].rect.y)
                                 game.solution=True
-                                game.npc.end = True
+                                game.mesNpc[game.np].end = True
             pygame.display.flip()
             if (game.np==game.nbBg ):
                 running=False
