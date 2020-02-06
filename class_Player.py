@@ -14,7 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.velocity = 15
         self.xVelocity = 0
         self.isJump = False
-        self.jumpCount = 0 #self.hauteurSaut
+        self.jumpCount = 0
         self.left = False
         self.right = False
         self.walkCount = 0
