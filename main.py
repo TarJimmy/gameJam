@@ -25,8 +25,12 @@ while continu:
     print(continu)
     running = True
     pygame.display.set_caption("Earth Zero²")
-    son= pygame.mixer.Sound("jumping.wav")
-    sonfond=pygame.mixer.Sound("fond.wav")
+    #fond sonore
+    SIFFLEMENT = pygame.mixer.music.load("sons/fond.wav")
+    pygame.mixer.music.play(20, 0.0)
+    #effet sonore
+    sonjump=pygame.mixer.Sound("sons/jumping.wav")
+
     screen = pygame.display.set_mode((game.width,game.height))
     #Variable en fonction que ce que l'on doit afficher
     MomentHistoire = True
@@ -48,12 +52,13 @@ while continu:
             else:
                 #Affiche le jeu
                 clock.tick(30)
-                sonfond.play(loops=-1, maxtime=0 , fade_ms=0)
+                # sonfond.play(loops=-1, maxtime=0 , fade_ms=0)
                 keys = pygame.key.get_pressed()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         running = False
                         continu = False
+
 
                 # if keys[pygame.K_LEFT]:
                 #     game.player.move_left()
@@ -73,12 +78,24 @@ while continu:
                 # else:
                 #     game.player.doJump()
 
+
                 # game.player.do()
 
 
                 game.actualiser(screen)
                 if game.np==3 and game.npModif==True or game.np==10:
                     MomentHistoire = True
+            if game.lancementDialogue:
+                for event in pygame.event.get():
+                    if event.type == pygame.MOUSEBUTTONUP:
+                        if event.button == 1:
+                            if game.buttons[(len(game.quest.reponsesFausses))].isClicked(event.pos):
+                            # or self.bouton2.isClicked(event.pos) or self.bouton3.isClicked(event.pos)
+                            # or self.bouton4.isClicked(event.pos) or self.bouton5.isClicked(event.pos):
+                                print(game.buttons[0].rect.x)
+                                print(game.buttons[0].rect.y)
+                                game.solution=True
+                                game.npc.end = True
             pygame.display.flip()
             if (game.np==game.nbBg ):
                 running=False

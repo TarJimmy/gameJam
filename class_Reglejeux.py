@@ -1,0 +1,62 @@
+import pygame
+
+pygame.init()
+pygame.font.init()
+surface = pygame.display.set_mode((960,568))
+pygame.display.set_caption("Règle de jeux")
+fond=pygame.image.load("images/backgrounds/bg6.jpg").convert()
+surface.blit(fond,(0,0))
+done = False
+imageclavier = pygame.image.load("images/boutons/clavier.jpg")
+imagefleche= pygame.image.load("images/boutons/fleche.jpg")
+while True :
+    for event in pygame.event.get():                            # User did something
+        if event.type == pygame.QUIT:                           # If user clicked close
+            done=True
+    surface.blit(fond,(0,0))
+    policeregle=pygame.font.Font(None,35)
+    police=pygame.font.Font(None,22)
+
+    texte0=policeregle.render('Régle du jeux',True,(96,76,141))
+    texte1=police.render('Objectif',True,(255,0,0))
+    texte2=police.render('Durant cette partie Vous devez evitez les obstacles ',True,(0,0,0))
+    texte3=police.render('crées par les effets de la pollutions.Votre objectif',True,(0,0,0))
+    texte4=police.render('est de répondre correctement aux questions du gardient',True,(0,0,0))
+    texte5=police.render('de la nature.Ce personnage est essentiel dans la partie.',True,(0,0,0))
+    texte6=police.render('Il permet de vous transmettre son savoir pour dépolluer',True,(0,0,0))
+    texte7=police.render('l''air À chaque ville le gardien vous pose une question.',True,(0,0,0))
+    texte8=police.render('Si vous trouvez la réponse il vous transmet une bonbonne',True,(0,0,0))
+    texte9=police.render('d''oxygène nécessaire pour votre survie.',True,(0,0,0))
+    texte10=police.render('Vous devrez faire gaffe de vigilance car votre vie diminue',True,(0,0,0))
+    texte11=police.render('progressivement au cours du temps vous devez manier rapidité',True,(0,0,0))
+    texte12=police.render('et réactivité afin d''ateindre la dernière ville sinon ',True,(0,0,0))
+    texte12=police.render('vous mourriez asphyxé.Bonne chance ',True,(0,0,0))
+    texte13=police.render('Commande',True,(255,0,0))
+    texte14=police.render('La touche espace permet de faire sauter le joueur en',True,(0,0,0))
+    texte15=police.render('l''air dans le but d''éviter les diffèrents obstacles',True,(0,0,0))
+    texte16=police.render('Les touche flèches permettent de déplacer le joueur',True,(0,0,0))
+    texte17=police.render('à gauche et à droite pour traverser les villes',True,(0,0,0))
+
+    surface.blit(imageclavier,(580,120))
+    surface.blit(imagefleche,(680,350))
+
+    surface.blit(texte0,(400,10))
+    surface.blit(texte1,(170,60))
+    surface.blit(texte2,(40,120))
+    surface.blit(texte3,(40,150))
+    surface.blit(texte4,(40,180))
+    surface.blit(texte5,(40,210))
+    surface.blit(texte6,(40,240))
+    surface.blit(texte7,(40,270))
+    surface.blit(texte8,(40,300))
+    surface.blit(texte9,(40,330))
+    surface.blit(texte10,(40,360))
+    surface.blit(texte11,(40,390))
+    surface.blit(texte12,(40,420))
+    surface.blit(texte13,(700,60))
+    surface.blit(texte14,(580,300))
+    surface.blit(texte15,(580,330))
+    surface.blit(texte16,(580,490))
+    surface.blit(texte17,(580,510))
+    
+    pygame.display.update()
