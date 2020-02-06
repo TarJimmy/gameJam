@@ -5,6 +5,9 @@ from class_Object import Object
 from class_Npc import Npc
 from class_Histoire import Histoire
 from class_Oxygene import Oxygene
+from class_Question import Question
+from class_Button import Button
+
 class Game:
     def __init__(self, pos_initialP, pos_initialN, pos_initialO):
         cheminBackGround = 'images/backgrounds/'
@@ -37,15 +40,24 @@ class Game:
         self.npModif = False
         #Variable pour détecter si player proche de npc
         self.isNear = False
-        #Valeurs X et Y du champ texte
-        self.textX = 590
-        self.textY = 300
-        self.msg = "Hello, je suis ton père !"
+        #Valeurs X et Y du champ question
+        self.quX = 20
+        self.quY = 475
+        #Valeurs X et Y des reponses
+        self.rX = 40
+        self.rY = 515
+        # Valeurs X et Y des boutons
+        self.bX = 20
+        self.bY = 505
+        self.solution = False
+        self.msg = None
         self.font = pygame.font.Font('freesansbold.ttf',32)
         #Pour vérifier qu'on peut toujours lancer le dialogue
         self.lancementDialogue = False
         #variable pour sauvegarder la position x du perso
         self.save = 0
+        self.buttons = []
+        self.quest = Question()
         #Ordre des backgrounds
         self.bg = [
             pygame.image.load(cheminBackGround + 'bg1.jpg'),
@@ -71,9 +83,7 @@ class Game:
         #generer notre npc
         self.npc = Npc(
             self.pos_initialN[0],
-            self.pos_initialN[1],
-            self.pos_initialN[2],
-            self.pos_initialN[3]
+            self.pos_initialN[1]
         )
         #generer un objet
         # self.object = Object(
@@ -157,24 +167,68 @@ class Game:
         texte = self.font.render(self.msg,True, (255,255,255))
         screen.blit(texte, (x,y))
 
-    def blocage_affichage(self,screen):
+    # def blocage_affichage(self,screen):
+    #     if self.isCollisionNpc():
+    #         self.player.x = self.npc.x - self.player.width
+    #         self.save = self.player.x
+    #         self.lancementDialogue = True
+    #     if self.lancementDialogue and self.save == self.player.x :
+    #         self.show_dialog(self.textX,self.textY,screen)
+
+    def blocage(self):
         if self.isCollisionNpc():
             self.player.x = self.npc.x - self.player.width
             self.save = self.player.x
             self.lancementDialogue = True
-        if self.lancementDialogue and self.save == self.player.x :
-            self.show_dialog(self.textX,self.textY,screen)
 
-    # def isCollisionObject(self):
-    #     distance = math.sqrt((math.pow(self.object.rect.x- self.player.x,2)) + (math.pow(self.object.rect.y - self.player.y,2)))
-    #     if distance < self.player.width:
-    #         return True
-    #         print("alow")
-    #
-    # def collision_object(self):
-    #     if (self.player.x == self.object.rect.x) and (self.player.y + self.player.height) < self.object.rect.y:
-    #         self.player.y = self.object.rect.y - self.player.height
-    #         print("wola")
+    def isCollisionObject(self):
+        distance = math.sqrt((math.pow(self.object.x - self.player.x,2)) + (math.pow(self.object.y - self.player.y,2)))
+        if distance < self.player.width:
+            return True
+        else:
+            return False
+
+    def collision_object(self,objet):
+        if (self.player.x == self.object.rect.x) and (self.player.y + self.player.height) < self.object.rect.y:
+            self.player.y = self.object.rect.y - self.player.height
+
+    def initBoutonQuestion(self):
+        self.buttons.clear()
+        i = 0
+        taille = len(self.quest.reponsesFausses)
+        distance = 0
+        while i < taille:
+            self.buttons.append(Button(distance+self.bX,self.bY,"images/boutons/boutonReponse.png"))
+            i += 1
+            distance = i*200
+        self.buttons.append(Button(distance+self.bX,self.bY,"images/boutons/boutonReponse.png"))
+
+    def afficherQuestion(self,screen,num):
+        if self.lancementDialogue and self.save == self.player.x :
+            pygame.draw.rect(screen,(255,25,255),(18,470,930,90))
+            self.quest.recupQuestionNum(num)
+            self.msg = self.quest.question
+            self.show_dialog(self.quX,self.quY,screen)
+            self.initBoutonQuestion()
+            i=0
+            distance = 0
+            taille = len(self.quest.reponsesFausses)
+            while i < taille:
+                self.msg = self.quest.reponsesFausses[i]
+                self.buttons[i].redimensionne(930//(taille),50)
+                self.buttons[i].draw(screen)
+                self.show_dialog(distance+self.rX,self.rY,screen)
+                i += 1
+                distance = i*200
+            self.msg = self.quest.reponseJuste
+            self.buttons[taille].redimensionne(930//(taille),50)
+            self.buttons[taille].draw(screen)
+            self.show_dialog(distance+self.rX,self.rY,screen)
+
+    def afficherSolution(self,screen):
+        pygame.draw.rect(screen,(255,25,255),(18,470,930,90))
+        self.msg = self.quest.solution
+        self.show_dialog(self.rX,self.rY,screen)
 
     def verifGravite(self):
         plateau11x = -30
@@ -244,6 +298,14 @@ class Game:
         self.testCollision()
         self.player.do()
         self.player.draw(screen)
+        self.npc.draw(screen)
+        # self.object.draw(screen)
+        self.isCollisionNpc()
+        self.blocage()
+        if not self.solution:
+            self.afficherQuestion(screen,2)
+        else:
+            self.afficherSolution(screen)
         # PLATFORMS = self.player.platforms()
         # PLATFORMS.add(self.player.platform(0, H - 10, W))
         # PLATFORMS.add(self.player.platform(200, 400, 100))
