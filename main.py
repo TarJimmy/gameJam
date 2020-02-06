@@ -5,6 +5,7 @@ from class_Player import Player
 from class_Accueil import Accueil
 from class_Histoire import Histoire
 pygame.init()
+pygame.font.init()
 #order : x,y, width, height
 pos_initialP = [40, 40, 40, 60]
 pos_initialN = [700, 395, 40, 60]
@@ -58,8 +59,6 @@ while continu:
                     if event.type == pygame.QUIT:
                         running = False
                         continu = False
-
-
                 # if keys[pygame.K_LEFT]:
                 #     game.player.move_left()
                 #
@@ -77,7 +76,6 @@ while continu:
                 #         game.gravite()
                 # else:
                 #     game.player.doJump()
-
 
                 # game.player.do()
 
