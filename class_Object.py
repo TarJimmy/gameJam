@@ -15,7 +15,7 @@ class Object(pygame.sprite.Sprite):
         # self.x2 =  int(x + width)
 
     def test(self, player):
-        if player.x < self.rect.x or player.x > self.x2: return None
+        if player.x < self.x1 or player.x > self.x2: return None
         if player.y <= self.y and player.y + player.velocity >= self.y: return self
         return None
 
