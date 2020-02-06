@@ -32,7 +32,7 @@ class Game:
         #Force de la gravité
         self.gravity = 2
         #Numéro du background
-        self.np = 0
+        self.np = 8
         #Largeur de l'écran
         self.width = 960
         #Hauteur de l'écran
@@ -40,7 +40,7 @@ class Game:
         #Classe pour raconter l'histoire du jeu
         self.histoire = Histoire()
         #Numéro de l'histoire courante
-        self.numHistoire = 1
+        self.numHistoire = 2
         #Le numero de page à été modifié (sert pour laffichage de l'histoire)
         self.npModif = False
         #Variable pour détecter si player proche de npc
@@ -97,7 +97,7 @@ class Game:
         # )
 
     def afficherHistoire(self, screen):
-        self.histoire.afficher(screen,self.numHistoire)
+        self.histoire.afficher(screen,self.numHistoire, self.player)
 
     def addSol(self, x,y,cheminImage):
         sol = Object(x,y,cheminImage)

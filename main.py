@@ -7,7 +7,7 @@ from class_Histoire import Histoire
 pygame.init()
 pygame.font.init()
 #order : x,y, width, height
-pos_initialP = [40, 40, 40, 60]
+pos_initialP = [40, 40, 64, 60]
 pos_initialN = [700, 395, 40, 60]
 pos_initialO = [100, 420]
 #creer l'unique objet jeu, le joueur et le npc font partie du jeu
@@ -111,10 +111,14 @@ while continu:
                                     game.mesNpc[game.np].end = True
                                     game.player.oxygene -= 150
                                     game.numQuest += 1
+                                    print("rep fausse")
                                 else:
                                     game.solution=True
                                     game.mesNpc[game.np].end = True
-                                    game.player.oxygene += game.mesNpc[game.np]
+                                    print("Hey")
+                                    for npc in game.mesNpc:
+                                        print(npc.bonus)
+                                    game.player.oxygene += game.mesNpc[game.np].bonus
                                     game.numQuest += 1
 
             pygame.display.flip()
