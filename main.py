@@ -59,6 +59,7 @@ while continu:
                         running = False
                         continu = False
 
+<<<<<<< HEAD
     #boucle tant que cette condition est vrai
     while running:
         if MomentHistoire == True:
@@ -98,6 +99,25 @@ while continu:
             #         game.gravite()
             # else:
             #     game.player.doJump()
+=======
+                # if keys[pygame.K_LEFT]:
+                #     game.player.move_left()
+                #
+                # elif keys[pygame.K_RIGHT]:
+                #     game.player.move_right()
+                # else:
+                #     game.player.no_move()
+                #
+                # if not (game.player.isJump):
+                #     #Si la touche espace est enfoncée et si le player n'est pas proche du npc
+                #     if keys[pygame.K_SPACE] and not (game.isNear):
+                #         game.player.jump()
+                #         son.play()
+                #     else:
+                #         game.gravite()
+                # else:
+                #     game.player.doJump()
+>>>>>>> 915b37bc1d13b0b7c9a3b8db2ac85ccdd2e52f72
 
                 # game.player.do()
 
