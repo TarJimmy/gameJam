@@ -5,7 +5,7 @@ class Credit:
         #Largeur de l'écran
         self.width = 800
         #Hauteur de l'écran
-        self.height = 800
+        self.height = 560
         #Titre de l'écran
         pygame.display.set_caption("Crédit")
         #Appliquer la taille de l'écran à l'attribut screen
@@ -35,7 +35,11 @@ class Credit:
         self.addRoles("Amine Benmansour", "Developpeur")
         self.addRoles("Lucas Zaetta", "Developpeur")
 
-        self.addSource("Images joueur", "machin database.com")
+        self.addSource("Images décors", "https://spritedatabase.net/")
+        self.addSource("Tutoriels Python", "https://openclassrooms.com/fr/")
+        self.addSource("Docs Python", "https://www.pygame.org/docs/")
+        self.addSource("Design plateformes", "https://itch.io/")
+
 
 
     def addRoles(self,nom, roles):

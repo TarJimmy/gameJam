@@ -113,9 +113,12 @@ while continu:
                                     game.solution=True
                                     game.mesNpc[game.np].end = True
                                     print("Bonne réponse")
+                                    game.numQuest += 1
                                 else:
                                     game.solution=True
                                     game.mesNpc[game.np].end = True
                                     print("Mauvaise réponse")
+                                    game.numQuest += 1
+
             pygame.display.flip()
 pygame.quit()
