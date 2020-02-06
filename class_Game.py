@@ -226,7 +226,7 @@ class Game:
                         tab.append(sol)
                         tab.append(oxygene)
                     if numCourant ==3:
-                        sol = Object(x,y,"images/objects/plateau1.png")
+                        sol = Object(x+20,y,"images/objects/plateau1.png")
                         self.mesNpc.append(Npc(x,y-40))
                         tab.append(sol)
             self.maps.append(tab)
@@ -387,7 +387,7 @@ class Game:
         self.isCollisionNpc()
         self.blocage()
         if not self.solution:
-            self.afficherQuestion(screen,15)
+            self.afficherQuestion(screen,1)
         else:
             self.afficherSolution(screen)
         # PLATFORMS = self.player.platforms()

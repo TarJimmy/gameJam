@@ -87,13 +87,18 @@ while continu:
                 for event in pygame.event.get():
                     if event.type == pygame.MOUSEBUTTONUP:
                         if event.button == 1:
-                            if game.buttons[(len(game.quest.reponsesFausses))].isClicked(event.pos):
-                            # or self.bouton2.isClicked(event.pos) or self.bouton3.isClicked(event.pos)
-                            # or self.bouton4.isClicked(event.pos) or self.bouton5.isClicked(event.pos):
-                                print(game.buttons[0].rect.x)
-                                print(game.buttons[0].rect.y)
-                                game.solution=True
-                                game.mesNpc[game.np].end = True
+                            if event.pos[1] >= game.bY:
+                                if game.buttons[(len(game.quest.reponsesFausses))].isClicked(event.pos):
+                                # or self.bouton2.isClicked(event.pos) or self.bouton3.isClicked(event.pos)
+                                # or self.bouton4.isClicked(event.pos) or self.bouton5.isClicked(event.pos):
+                                    game.solution=True
+                                    game.mesNpc[game.np].end = True
+                                    print("Bonne réponse")
+                                else:
+                                    game.solution=True
+                                    game.mesNpc[game.np].end = True
+                                    print("Mauvaise réponse")
+
             pygame.display.flip()
             if (game.np==game.nbBg ):
                 running=False
