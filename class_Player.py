@@ -5,7 +5,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height):
         super().__init__()
         #Gere la hauteur du saut
-        self.hauteurSaut = 10
+        self.hauteurSaut = 7
         self.oxygene = 50
         self.x = x
         self.y = y
@@ -50,18 +50,26 @@ class Player(pygame.sprite.Sprite):
         ]
         self.char = pygame.image.load(cheminImage+'standing.png')
 
-    def keys(self):
+    def collide(self,game):
+        game.testCollision()
+
+    def keys(self,game):
 
         k = pygame.key.get_pressed()
         if k[pygame.K_LEFT]:
             self.x -=self.velocity
             self.right = False
             self.left = True
+            game.testCollision()
+            # self.falling = False
+
 
         elif k[pygame.K_RIGHT]:
             self.x += self.velocity
             self.right = True
             self.left = False
+            game.testCollision()
+            # self.falling = False
 
         else:
             self.right = False
@@ -81,7 +89,8 @@ class Player(pygame.sprite.Sprite):
     def move(self):
 
         if self.currentPlatform:
-            if not self.currentPlatform.test(self):
+            if self.currentPlatform.test(self) == None:
+                print("je passe")
                 self.falling = True
                 self.currentPlatform = None
         if self.jumping:
@@ -94,8 +103,8 @@ class Player(pygame.sprite.Sprite):
             self.y += self.velocity
 
     #gere les evenements du joueurs
-    def do(self):
-        self.keys()
+    def do(self,game):
+        self.keys(game)
         self.move()
 
 
@@ -130,19 +139,19 @@ class Player(pygame.sprite.Sprite):
         self.left = False
         self.walkCount = 0
 
-    def jump(self):
-        self.isJump = True
-        self.right = False
-        self.left = False
-        self.walkCount = 0
-
-    def doJump(self):
-        if self.jumpCount >= -self.hauteurSaut:
-            self.y -= (self.jumpCount * abs(self.jumpCount)) * 0.5
-            self.jumpCount -= 1
-        else:
-            self.isJump = False
-            self.jumpCount = 10
+    # def jump(self):
+    #     self.isJump = True
+    #     self.right = False
+    #     self.left = False
+    #     self.walkCount = 0
+    #
+    # def doJump(self):
+    #     if self.jumpCount >= -self.hauteurSaut:
+    #         self.y -= (self.jumpCount * abs(self.jumpCount)) * 0.5
+    #         self.jumpCount -= 1
+    #     else:
+    #         self.isJump = False
+    #         self.jumpCount = 10
 
     # class platform:
     # 	def __init__(self, x, y, width):

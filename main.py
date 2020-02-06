@@ -51,7 +51,8 @@ while continu:
                                 game.npModif = False
             else:
                 #Affiche le jeu
-                clock.tick(40)
+                clock.tick(30)
+                # sonfond.play(loops=-1, maxtime=0 , fade_ms=0)
                 keys = pygame.key.get_pressed()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
