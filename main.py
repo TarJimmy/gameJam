@@ -10,21 +10,22 @@ pos_initialP = [40, 40, 40, 60]
 pos_initialN = [700, 395, 40, 60]
 pos_initialO = [100, 420]
 #creer l'unique objet jeu, le joueur et le npc font partie du jeu
-game = Game(pos_initialP,pos_initialN,pos_initialO)
-game.initMap()
-#Variable en fonction que ce que l'on doit afficher
-
-#cree l'unique objet parametre
 param = Parametre()
-clock = pygame.time.Clock()
-acceuil = Accueil()
-continu = acceuil.afficher()
-if continu:
+continu = True
+while continu:
+    #creer l'unique objet jeu, le joueur et le npc font partie du jeu
+    game = Game(pos_initialP,pos_initialN,pos_initialO)
+    game.initMap()
+    #cree l'unique objet parametre
+    clock = pygame.time.Clock()
+    acceuil = Accueil()
+    continu = acceuil.afficher()
     running = True
     pygame.display.set_caption("Earth Zero²")
     son= pygame.mixer.Sound("jumping.wav")
     sonfond=pygame.mixer.Sound("fond.wav")
     screen = pygame.display.set_mode((game.width,game.height))
+    #Variable en fonction que ce que l'on doit afficher
     MomentHistoire = True
 
     #boucle tant que cette condition est vrai
@@ -34,6 +35,7 @@ if continu:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                    continu = False
                 elif event.type == pygame.MOUSEBUTTONUP: # quand je relache le bouton
                     if event.button == 1: # 1= clique gauche
                         if game.histoire.buttonNext.isClicked(event.pos):
@@ -48,7 +50,7 @@ if continu:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-
+                    continu = False
             if keys[pygame.K_LEFT]:
                 game.player.move_left()
 
@@ -70,4 +72,6 @@ if continu:
             if game.np==3 and game.npModif==True or game.np==10:
                 MomentHistoire = True
         pygame.display.flip()
+        if (game.np==game.nbBg ):
+            running=False
 pygame.quit()

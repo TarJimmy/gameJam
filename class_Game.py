@@ -4,6 +4,7 @@ from class_Player import Player
 from class_Object import Object
 from class_Npc import Npc
 from class_Histoire import Histoire
+from class_Oxygene import Oxygene
 class Game:
     def __init__(self, pos_initialP, pos_initialN, pos_initialO):
         cheminBackGround = 'images/backgrounds/'
@@ -58,6 +59,7 @@ class Game:
             pygame.image.load(cheminBackGround + 'bg9.jpg'),
             pygame.image.load(cheminBackGround + 'bg10.jpg')
         ]
+        self.nbBg = len(self.bg)
         #generer notre joueur
         self.player = Player(
             self.pos_initialP[0],
@@ -96,12 +98,11 @@ class Game:
                  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.addFormatMap(map)
-        print(self.formatsMaps)
     #Initialise toutes les maps (en créant les blocs associé)
     def initMap(self):
         self.createFormatMap()
@@ -113,16 +114,20 @@ class Game:
             for ligne in tab:
                 x = -30
                 y+= 60
-                for solCourant in ligne:
+                for numCourant in ligne:
                     x += 62
-                    if solCourant == 1:
+                    if numCourant == 1:
                         sol = Object(x,y,"images/objects/plateau1.png")
                         tab2.append(sol)
+                    if numCourant == 2:
+                        sol = Object(x,y,"images/objects/plateau1.png")
+                        oxygene = Oxygene(x ,y - 41)
+                        tab2.append(sol)
+                        tab2.append(oxygene)
             self.maps.append(tab2)
-        print(self.maps)
     #Affiche la map séléctionné
     def afficherMap(self, screen):
-        recupMap = self.maps[1]
+        recupMap = self.maps[0]
         for solCourant in recupMap:
             screen.blit(solCourant.image,(solCourant.rect.x,solCourant.rect.y))
 
