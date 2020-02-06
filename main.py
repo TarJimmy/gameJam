@@ -12,14 +12,17 @@ pos_initialO = [100, 420]
 #creer l'unique objet jeu, le joueur et le npc font partie du jeu
 param = Parametre()
 continu = True
+print(continu)
 while continu:
     #creer l'unique objet jeu, le joueur et le npc font partie du jeu
     game = Game(pos_initialP,pos_initialN,pos_initialO)
+    print(continu)
     game.initMap()
     #cree l'unique objet parametre
     clock = pygame.time.Clock()
     acceuil = Accueil()
     continu = acceuil.afficher()
+    print(continu)
     running = True
     pygame.display.set_caption("Earth Zero²")
     son= pygame.mixer.Sound("jumping.wav")

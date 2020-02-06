@@ -54,21 +54,20 @@ class Player(pygame.sprite.Sprite):
 
         k = pygame.key.get_pressed()
         if k[pygame.K_LEFT]:
-            self.xVelocity = -self.velocity
+            self.x -=self.velocity
             self.right = False
             self.left = True
 
         elif k[pygame.K_RIGHT]:
-            self.xVelocity = self.velocity
+            self.x += self.velocity
             self.right = True
             self.left = False
 
         else:
-            self.xVelocity = 0
             self.right = False
             self.left = False
 
-        if k[pygame.K_UP] and not self.falling:
+        if k[pygame.K_SPACE] and not self.falling:
             self.jumping = True
             self.jumpCounter = 0
 
@@ -81,7 +80,6 @@ class Player(pygame.sprite.Sprite):
 
     def move(self):
 
-        self.x += self.xVelocity
         if self.currentPlatform:
             if not self.currentPlatform.test(self):
                 self.falling = True
@@ -95,7 +93,7 @@ class Player(pygame.sprite.Sprite):
         elif self.falling:
             self.y += self.velocity
 
-
+    #gere les evenements du joueurs
     def do(self):
         self.keys()
         self.move()
@@ -146,41 +144,41 @@ class Player(pygame.sprite.Sprite):
             self.isJump = False
             self.jumpCount = 10
 
-    class platform:
-    	def __init__(self, x, y, width):
-    		self.x1 = int(x)
-    		self.y = int(y)
-    		self.x2 =  int(x + width)
+    # class platform:
+    # 	def __init__(self, x, y, width):
+    # 		self.x1 = int(x)
+    # 		self.y = int(y)
+    # 		self.x2 =  int(x + width)
+    #
+    # 	def test(self, player):
+    # 		if player.x < self.x1 or player.x > self.x2: return None
+    # 		if player.y <= self.y and player.y + player.velocity >= self.y: return self
+    # 		return None
 
-    	def test(self, player):
-    		if player.x < self.x1 or player.x > self.x2: return None
-    		if player.y <= self.y and player.y + player.velocity >= self.y: return self
-    		return None
+    # class platforms:
+    # 	def __init__(self):
+    # 		self.container = list([])
+    #
+    # 	def add(self, p):
+    # 		self.container.append(p)
 
-    class platforms:
-    	def __init__(self):
-    		self.container = list([])
+    	# def testCollision(self, player):
+    	# 	if not player.falling: return False
+    	# 	for p in self.container:
+    	# 		result = p.test(player)
+    	# 		if result:
+    	# 			player.currentPlatform = result
+    	# 			player.y = result.y
+    	# 			player.falling = False
+    	# 			return True
+    	# 	return False
+        #
+    	# def draw(self):
+    	# 	WHITE = (0, 255, 0, 255)
+    	# 	display = pygame.display.get_surface()
+    	# 	for p in self.container:
+    	# 		pygame.draw.line(display, WHITE, (p.x1, p.y), (p.x2, p.y), 10)
 
-    	def add(self, p):
-    		self.container.append(p)
-
-    	def testCollision(self, player):
-    		if not player.falling: return False
-    		for p in self.container:
-    			result = p.test(player)
-    			if result:
-    				player.currentPlatform = result
-    				player.y = result.y
-    				player.falling = False
-    				return True
-    		return False
-
-    	def draw(self):
-    		WHITE = (0, 255, 0, 255)
-    		display = pygame.display.get_surface()
-    		for p in self.container:
-    			pygame.draw.line(display, WHITE, (p.x1, p.y), (p.x2, p.y), 10)
-
-    	def do(self, player):
-    		self.testCollision(player)
-    		self.draw()
+    	# def do(self, player):
+    	# 	self.testCollision(player)
+    	# 	self.draw()
