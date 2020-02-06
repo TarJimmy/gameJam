@@ -100,31 +100,33 @@ class Game:
                  [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.addFormatMap(map)
     #Initialise toutes les maps (en créant les blocs associé)
     def initMap(self):
         self.createFormatMap()
-        y = -35
-        i = 0
-        tab2 = []
-        for tab in self.formatsMaps:
-            tab2.clear()
-            for ligne in tab:
+        for mapCourant in self.formatsMaps:
+            tab = []
+            y = -35
+            for ligne in mapCourant:
                 x = -30
                 y+= 60
-                for numCourant in ligne:
+                i = 0
+                taille = len(ligne)
+                while i < taille:
                     x += 62
-                    if numCourant == 1:
+                    numCourant = ligne[i]
+                    if numCourant != 0:
                         sol = Object(x,y,"images/objects/plateau1.png")
-                        tab2.append(sol)
+                        tab.append(sol)
+
                     if numCourant == 2:
-                        sol = Object(x,y,"images/objects/plateau1.png")
                         oxygene = Oxygene(x ,y - 41)
-                        tab2.append(sol)
-                        tab2.append(oxygene)
-            self.maps.append(tab2)
+                        tab.append(sol)
+                        tab.append(oxygene)
+                    i +=1
+            self.maps.append(tab)
     #Affiche la map séléctionné
     def afficherMap(self, screen):
         recupMap = self.maps[0]
@@ -205,20 +207,15 @@ class Game:
 
     def testCollision(self):
         if not self.player.falling: return False
-        for solCourant in self.maps[0]:
-            print(solCourant)
+        for solCourant in self.maps[self.np]:
             result = solCourant.test(self.player)
-            print(result)
             if result:
                 self.player.currentPlatform = result
                 self.player.y = result.y
-                self.player.falling = False
+                self.player.failling = False
                 return True
         return False
 
-    def do(self):
-        self.testCollision(self.player)
-        self.afficherMap()
 
     def actualiser(self, screen):
         W, H = 1000, 500
@@ -226,10 +223,12 @@ class Game:
         AREA = W * H
         BLACK = (0, 0, 0, 255)
         WHITE = (0, 255, 0, 255)
+
+        self.testCollision()
+        print(self.player.falling)
         self.plateaux(screen)
         self.changerPlateaux()
         self.afficherMap(screen)
-        self.testCollision()
         self.player.do()
         self.player.draw(screen)
         # PLATFORMS = self.player.platforms()

@@ -92,6 +92,9 @@ class Player(pygame.sprite.Sprite):
                 self.falling = True
         elif self.falling:
             self.y += self.velocity
+            self.falling = False
+        else:
+            self.y += self.velocity
 
     #gere les evenements du joueurs
     def do(self):
