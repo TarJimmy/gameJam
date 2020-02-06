@@ -5,6 +5,7 @@ from class_Player import Player
 from class_Accueil import Accueil
 from class_Histoire import Histoire
 pygame.init()
+pygame.font.init()
 #order : x,y, width, height
 pos_initialP = [40, 40, 40, 60]
 pos_initialN = [700, 395, 40, 60]
@@ -34,9 +35,10 @@ while continu:
     screen = pygame.display.set_mode((game.width,game.height))
     #Variable en fonction que ce que l'on doit afficher
     MomentHistoire = True
+    retourAccueil = False
     if continu:
         #boucle tant que cette condition est vrai
-        while running:
+        while running and retourAccueil==False:
             if MomentHistoire == True:
                 game.afficherHistoire(screen)
                 for event in pygame.event.get():
@@ -49,6 +51,11 @@ while continu:
                                 MomentHistoire = False
                                 game.numHistoire +=1
                                 game.npModif = False
+                                if game.np==(game.nbBg-1):
+                                    retourAccueil = True
+            elif retourAccueil:
+                if not MomentHistoire:
+                    running = False
             else:
                 #Affiche le jeu
                 clock.tick(30)
@@ -58,8 +65,6 @@ while continu:
                     if event.type == pygame.QUIT:
                         running = False
                         continu = False
-
-
                 # if keys[pygame.K_LEFT]:
                 #     game.player.move_left()
                 #
@@ -78,25 +83,27 @@ while continu:
                 # else:
                 #     game.player.doJump()
 
-
                 # game.player.do()
 
 
                 game.actualiser(screen)
-                if game.np==3 and game.npModif==True or game.np==10:
+                if game.np==7 and game.npModif==True or game.np==(game.nbBg-1):
                     MomentHistoire = True
             if game.lancementDialogue:
                 for event in pygame.event.get():
                     if event.type == pygame.MOUSEBUTTONUP:
                         if event.button == 1:
-                            if game.buttons[(len(game.quest.reponsesFausses))].isClicked(event.pos):
-                            # or self.bouton2.isClicked(event.pos) or self.bouton3.isClicked(event.pos)
-                            # or self.bouton4.isClicked(event.pos) or self.bouton5.isClicked(event.pos):
-                                print(game.buttons[0].rect.x)
-                                print(game.buttons[0].rect.y)
-                                game.solution=True
-                                game.npc.end = True
+                            if event.pos[1] >= game.bY:
+                                if game.buttons[(len(game.quest.reponsesFausses))].isClicked(event.pos):
+                                # or self.bouton2.isClicked(event.pos) or self.bouton3.isClicked(event.pos)
+                                # or self.bouton4.isClicked(event.pos) or self.bouton5.isClicked(event.pos):
+                                    game.solution=True
+                                    game.mesNpc[game.np].end = True
+                                    print("Bonne réponse")
+                                else:
+                                    game.solution=True
+                                    game.mesNpc[game.np].end = True
+                                    print("Mauvaise réponse")
+
             pygame.display.flip()
-            if (game.np==game.nbBg ):
-                running=False
 pygame.quit()
