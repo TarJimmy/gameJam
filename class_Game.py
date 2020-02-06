@@ -263,6 +263,9 @@ class Game:
             self.player.x = self.mesNpc[self.np].x - self.player.width
             self.save = self.player.x
             self.lancementDialogue = True
+            sondialogue=pygame.mixer.Sound("sons/question.wav")
+            sondialogue.play()
+
 
     def isCollisionObject(self):
         distance = math.sqrt((math.pow(self.object.x - self.player.x,2)) + (math.pow(self.object.y - self.player.y,2)))
