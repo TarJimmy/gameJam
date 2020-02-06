@@ -4,6 +4,7 @@ from class_Player import Player
 from class_Object import Object
 from class_Npc import Npc
 from class_Histoire import Histoire
+from class_Oxygene import Oxygene
 class Game:
     def __init__(self, pos_initialP, pos_initialN, pos_initialO):
         cheminBackGround = 'images/backgrounds/'
@@ -58,6 +59,7 @@ class Game:
             pygame.image.load(cheminBackGround + 'bg9.jpg'),
             pygame.image.load(cheminBackGround + 'bg10.jpg')
         ]
+        self.nbBg = len(self.bg)
         #generer notre joueur
         self.player = Player(
             self.pos_initialP[0],
@@ -74,11 +76,11 @@ class Game:
             self.pos_initialN[3]
         )
         #generer un objet
-        self.object = Object(
-            self.pos_initialO[0],
-            self.pos_initialO[1],
-            cheminObject
-        )
+        # self.object = Object(
+        #     self.pos_initialO[0],
+        #     self.pos_initialO[1],
+        #     cheminObject
+        # )
 
     def afficherHistoire(self, screen):
         self.histoire.afficher(screen,self.numHistoire)
@@ -96,12 +98,11 @@ class Game:
                  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.addFormatMap(map)
-        print(self.formatsMaps)
     #Initialise toutes les maps (en créant les blocs associé)
     def initMap(self):
         self.createFormatMap()
@@ -113,13 +114,17 @@ class Game:
             for ligne in tab:
                 x = -30
                 y+= 60
-                for solCourant in ligne:
+                for numCourant in ligne:
                     x += 62
-                    if solCourant == 1:
+                    if numCourant == 1:
                         sol = Object(x,y,"images/objects/plateau1.png")
                         tab2.append(sol)
+                    if numCourant == 2:
+                        sol = Object(x,y,"images/objects/plateau1.png")
+                        oxygene = Oxygene(x ,y - 41)
+                        tab2.append(sol)
+                        tab2.append(oxygene)
             self.maps.append(tab2)
-        print(self.maps)
     #Affiche la map séléctionné
     def afficherMap(self, screen):
         recupMap = self.maps[0]
@@ -198,6 +203,23 @@ class Game:
             self.player.x = 15
             self.player.y = 390
 
+    def testCollision(self):
+        if not self.player.falling: return False
+        for solCourant in self.maps[0]:
+            print(solCourant)
+            result = solCourant.test(self.player)
+            print(result)
+            if result:
+                self.player.currentPlatform = result
+                self.player.y = result.y
+                self.player.falling = False
+                return True
+        return False
+
+    def do(self):
+        self.testCollision(self.player)
+        self.afficherMap()
+
     def actualiser(self, screen):
         W, H = 1000, 500
         HW, HH = W / 2, H / 2
@@ -207,15 +229,16 @@ class Game:
         self.plateaux(screen)
         self.changerPlateaux()
         self.afficherMap(screen)
+        self.testCollision()
         self.player.do()
         self.player.draw(screen)
-        PLATFORMS = self.player.platforms()
-        PLATFORMS.add(self.player.platform(0, H - 10, W))
-        PLATFORMS.add(self.player.platform(200, 400, 100))
-        PLATFORMS.add(self.player.platform(300, 300, 100))
+        # PLATFORMS = self.player.platforms()
+        # PLATFORMS.add(self.player.platform(0, H - 10, W))
+        # PLATFORMS.add(self.player.platform(200, 400, 100))
+        # PLATFORMS.add(self.player.platform(300, 300, 100))
         # for i in range(0, 50):
         # 	PLATFORMS.add(self.player.platform(random.randint(0, W - 50), random.randint(50, H - 60), 50))
-        PLATFORMS.do(self.player)
+        # self.do()
         # self.npc.draw(screen)
         # self.object.draw(screen)
         # self.blocage_affichage(screen)
