@@ -1,5 +1,4 @@
-import pygame
-
+import pygame, random
 class Npc(pygame.sprite.Sprite):
     """docstring for npc."""
 
@@ -12,11 +11,10 @@ class Npc(pygame.sprite.Sprite):
         self.end = False
         cheminImage = "images/npc/"
         self.char = pygame.image.load(cheminImage+'L9E.png')
+        self.bonus = random.randint(300, 500)
 
     def draw(self,window):
         #On retire le npc s'il a donné la solution
-        if self.end:
-            self.x = 1000
-            self.y = 1000
-        else:
+        if not self.end:
             window.blit(self.char,(self.x,self.y))
+            self.bonus = 0
