@@ -35,10 +35,10 @@ class RegleJeux:
         self.texte17=self.policecommande.render('à gauche et à droite pour traverser les villes.',True,(255,255,255))
 
 
-        self.texte18=self.policecommande.render('Le gardien de la nature permet de vous transmettre',True,(255,255,255))
-        self.texte19=self.policecommande.render('son savoir pour dépolluer les villes. Il vous pose',True,(255,255,255))
-        self.texte20=self.policecommande.render('une question. Si vous trouvez la bonne réponse il vous',True,(255,255,255))
-        self.texte21=self.policecommande.render("transmet une bonbonne d'oxygène nécessaire pour votre survie.",True,(255,255,255))
+        self.texte18=self.policecommande.render('Le gardien de la nature vous pose des questions. Si vous ',True,(255,255,255))
+        self.texte19=self.policecommande.render("répondez juste il vous donne de l'oxygène. Dans le cas",True,(255,255,255))
+        self.texte20=self.policecommande.render('contraire il vous en retire. Des bombonnes sont également',True,(255,255,255))
+        self.texte21=self.policecommande.render("disponibles et vous donnent accès des bonus d'oxygène.",True,(255,255,255))
         self.buttonBack = Button(160,510,"images/boutons/boutonRetourAccueil.gif")
 
     def afficher(self,surface):
