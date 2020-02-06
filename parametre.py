@@ -2,9 +2,9 @@
 class Parametre:
     def __init__(self):
         #pour affichage correct sur vidéo-projecteur
-        self.widthMax = 1024
-        self.heightMax = 768
-        
+        self.widthMax = 960
+        self.heightMax = 568
+
         self.difficulte = 1
 
     def verifWidth(self,width):
