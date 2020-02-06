@@ -54,6 +54,8 @@ class Game:
         self.bX = 20
         self.bY = 505
         self.solution = False
+        #Compteur de question
+        self.numQuest = 1
         self.msg = None
         self.font = pygame.font.Font('freesansbold.ttf',15)
         #Pour vérifier qu'on peut toujours lancer le dialogue
@@ -298,13 +300,13 @@ class Game:
         while i < taille:
             self.buttons.append(Button(distance+self.bX,self.bY,"images/boutons/boutonReponse.png"))
             i += 1
-            distance = i*200
+            distance = i*(930//(taille+1))
         self.buttons.append(Button(distance+self.bX,self.bY,"images/boutons/boutonReponse.png"))
 
-    def afficherQuestion(self,screen,num):
+    def afficherQuestion(self,screen):
         if self.lancementDialogue and self.save == self.player.x :
             pygame.draw.rect(screen,(255,25,255),(18,470,930,90))
-            self.quest.recupQuestionNum(num)
+            self.quest.recupQuestionNum(self.numQuest)
             self.msg = self.quest.question
             self.show_dialog(self.quX,self.quY,screen)
             self.initBoutonQuestion()
@@ -313,13 +315,13 @@ class Game:
             taille = len(self.quest.reponsesFausses)
             while i < taille:
                 self.msg = self.quest.reponsesFausses[i]
-                self.buttons[i].redimensionne(930//(taille),50)
+                self.buttons[i].redimensionne(930//(taille+1),50)
                 self.buttons[i].draw(screen)
                 self.show_dialog(distance+self.rX,self.rY,screen)
                 i += 1
-                distance = i*200
+                distance = i*(930//(taille+1))
             self.msg = self.quest.reponseJuste
-            self.buttons[taille].redimensionne(930//(taille),50)
+            self.buttons[taille].redimensionne(930//(taille+1),50)
             self.buttons[taille].draw(screen)
             self.show_dialog(distance+self.rX,self.rY,screen)
 
@@ -403,7 +405,7 @@ class Game:
         self.isCollisionNpc()
         self.blocage()
         if not self.solution:
-            self.afficherQuestion(screen,1)
+            self.afficherQuestion(screen)
         else:
             self.afficherSolution(screen)
         # PLATFORMS = self.player.platforms()
