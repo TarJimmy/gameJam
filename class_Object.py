@@ -7,12 +7,8 @@ class Object(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-<<<<<<< HEAD
-        self.x2 =  x + 67
-=======
         self.x1 = x -30
         self.x2 =  x + 40
->>>>>>> 37003f8164d11da2c439bf813964326b83d61049
         self.y = y - 41
         # self.x1 = int(x)
         # self.y = int(y)

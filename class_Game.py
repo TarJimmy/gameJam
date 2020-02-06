@@ -230,13 +230,7 @@ class Game:
                         oxygene = Oxygene(x ,y - 41)
                         tab.append(sol)
                         tab.append(oxygene)
-<<<<<<< HEAD
                     i +=1
-=======
-                    # if numCourant == 3:
-                    #     sol1 = Object(x,y,"images/objects/sol1.png")
-                    #     tab.append(sol1)
->>>>>>> 37003f8164d11da2c439bf813964326b83d61049
             self.maps.append(tab)
         self.mapCourante = self.maps[0]
     #Affiche la map séléctionné
@@ -369,12 +363,8 @@ class Game:
 
     def testCollision(self):
         if not self.player.falling: return False
-<<<<<<< HEAD
-        for solCourant in self.maps[self.np]:
-=======
         for solCourant in self.mapCourante:
             # print(solCourant)
->>>>>>> 37003f8164d11da2c439bf813964326b83d61049
             result = solCourant.test(self.player)
             if result:
                 self.player.currentPlatform = result
@@ -396,12 +386,8 @@ class Game:
         self.plateaux(screen)
         self.changerPlateaux()
         self.afficherMap(screen)
-<<<<<<< HEAD
-        self.player.do()
-=======
         self.testCollision()
         self.player.do(self)
->>>>>>> 37003f8164d11da2c439bf813964326b83d61049
         self.player.draw(screen)
         self.npc.draw(screen)
         # self.object.draw(screen)

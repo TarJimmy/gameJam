@@ -60,10 +60,6 @@ while continu:
                         running = False
                         continu = False
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 37003f8164d11da2c439bf813964326b83d61049
                 # if keys[pygame.K_LEFT]:
                 #     game.player.move_left()
                 #
@@ -81,10 +77,6 @@ while continu:
                 #         game.gravite()
                 # else:
                 #     game.player.doJump()
-<<<<<<< HEAD
-=======
-
->>>>>>> 37003f8164d11da2c439bf813964326b83d61049
 
                 # game.player.do()
 

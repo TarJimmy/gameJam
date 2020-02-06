@@ -34,8 +34,10 @@ class Accueil:
         # self.rouge = (255,0,0)
         self.boutonJouer = Button(100,250,"images/boutons/boutonJouer.gif")
         self.boutonJouer.redimensionne(180,47)
-        self.boutonCredit = Button(500,250,"images/boutons/boutonCredit.gif")
-        self.boutonCredit.redimensionne(180,47)
+        self.boutonQuitter = Button(500,250,"images/boutons/boutonQuitter.gif")
+        self.boutonQuitter.redimensionne(228,47)
+        self.boutonCredit = Button(self.width-134,self.height -35,"images/boutons/boutonCredit.gif")
+        self.boutonCredit.redimensionne(129,30)
         self.boutonRegle = Button(220,310,"images/boutons/boutonRegleJeu.gif")
         self.boutonRegle.redimensionne(343,47)
         self.logo = Button(275,10,"images/boutons/logo.png")
@@ -87,13 +89,14 @@ class Accueil:
                 #Met à jour l'écran
                 self.screen.blit(self.boutonRegle.image,(self.boutonRegle.rect.x,self.boutonRegle.rect.y))
                 self.screen.blit(self.boutonJouer.image, (self.boutonJouer.rect.x,self.boutonJouer.rect.y))
+                self.screen.blit(self.boutonQuitter.image, (self.boutonQuitter.rect.x,self.boutonQuitter.rect.y))
                 self.screen.blit(self.boutonCredit.image, (self.boutonCredit.rect.x,self.boutonCredit.rect.y))
                 self.screen.blit(self.logo.image, (self.logo.rect.x,self.logo.rect.y))
 
                 #Parcours tous les évenements possibles
                 for event in pygame.event.get():
                     # si l'evenement est fermeture de fenetre
-                    if event.type == pygame.QUIT:
+                    if event.type == pygame.QUIT :
                         self.running = False
                         continu = False
                     elif event.type == pygame.MOUSEBUTTONUP:
@@ -104,5 +107,8 @@ class Accueil:
                                 credit = True
                             if self.boutonRegle.isClicked(event.pos):
                                 regleJeu = True
+                            if  self.boutonQuitter.isClicked(event.pos):
+                                self.running = False
+                                continu = False
             pygame.display.flip()
         return continu
