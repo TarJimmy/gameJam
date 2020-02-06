@@ -233,15 +233,15 @@ class Game:
                 for numCourant in ligne:
                     x += 62
                     if numCourant == 1:
-                        sol = Object(x,y,"images/objects/plateau1.png")
+                        sol = Object(x,y,"images/objects/ventilateur.png")
                         tab.append(sol)
                     if numCourant == 2:
-                        sol = Object(x,y,"images/objects/plateau1.png")
+                        sol = Object(x,y,"images/objects/ventilateur.png")
                         oxygene = Oxygene(x ,y - 41)
                         tab.append(sol)
                         tab.append(oxygene)
                     if numCourant ==3:
-                        sol = Object(x+20,y,"images/objects/plateau1.png")
+                        sol = Object(x+20,y,"images/objects/ventilateur.png")
                         self.mesNpc.append(Npc(x,y-40))
                         tab.append(sol)
             self.maps.append(tab)
