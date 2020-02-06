@@ -375,7 +375,7 @@ class Game:
             self.player.x = 15
             # self.player.y = 390
         if self.player.y > 568:
-            self.player.oxygene -= 100
+            self.player.oxygene -= 250
             self.player.x = self.pos_initialP[0]
             self.player.y = self.pos_initialP[1]
 
