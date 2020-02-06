@@ -14,7 +14,6 @@ class Game:
         cheminObject = 'images/objects/sol1.png'
         self.maps = []
         self.formatsMaps = []
-        self.mapCourante = None
         #Mesure du temps
         self.frame_count = 0
         self.frame_rate = 60
@@ -52,7 +51,7 @@ class Game:
         self.bY = 505
         self.solution = False
         self.msg = None
-        self.font = pygame.font.Font('freesansbold.ttf',32)
+        self.font = pygame.font.Font('freesansbold.ttf',15)
         #Pour vérifier qu'on peut toujours lancer le dialogue
         self.lancementDialogue = False
         #variable pour sauvegarder la position x du perso
@@ -110,7 +109,7 @@ class Game:
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-                 [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 3, 0, 1, 0],
+                 [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1, 0],
                  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.addFormatMap(map)
@@ -226,7 +225,7 @@ class Game:
                         tab.append(sol)
                         tab.append(oxygene)
                     if numCourant ==3:
-                        sol = Object(x,y,"images/objects/plateau1.png")
+                        sol = Object(x+20,y,"images/objects/plateau1.png")
                         self.mesNpc.append(Npc(x,y-40))
                         tab.append(sol)
             self.maps.append(tab)
@@ -347,6 +346,8 @@ class Game:
             self.npModif = True
             self.mapCourante.clear()
             self.mapCourante = self.maps[self.np]
+            #Pour arreter d'afficher la solution quand on change de map
+            self.solution = False
         if self.player.x < -20 and self.np > 0:
 
             self.player.x = self.pos_initialP[0]
@@ -387,7 +388,7 @@ class Game:
         self.isCollisionNpc()
         self.blocage()
         if not self.solution:
-            self.afficherQuestion(screen,2)
+            self.afficherQuestion(screen,1)
         else:
             self.afficherSolution(screen)
         # PLATFORMS = self.player.platforms()
