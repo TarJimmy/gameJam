@@ -52,7 +52,7 @@ class Game:
         self.bY = 505
         self.solution = False
         self.msg = None
-        self.font = pygame.font.Font('freesansbold.ttf',32)
+        self.font = pygame.font.Font('freesansbold.ttf',15)
         #Pour vérifier qu'on peut toujours lancer le dialogue
         self.lancementDialogue = False
         #variable pour sauvegarder la position x du perso
@@ -395,7 +395,7 @@ class Game:
         self.isCollisionNpc()
         self.blocage()
         if not self.solution:
-            self.afficherQuestion(screen,2)
+            self.afficherQuestion(screen,15)
         else:
             self.afficherSolution(screen)
         # PLATFORMS = self.player.platforms()
