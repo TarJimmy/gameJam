@@ -92,6 +92,9 @@ class Game:
     def addFormatMap(self,map):
         self.formatsMaps.append(map)
     #Crée toutes les formations de maps
+
+
+
     def createFormatMap(self):
         map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
@@ -100,34 +103,43 @@ class Game:
                  [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        self.addFormatMap(map)
+        map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.addFormatMap(map)
     #Initialise toutes les maps (en créant les blocs associé)
     def initMap(self):
         self.createFormatMap()
-        y = -35
         i = 0
-        tab2 = []
-        for tab in self.formatsMaps:
-            tab2.clear()
-            for ligne in tab:
+        for mapCourante in self.formatsMaps:
+            y = -35
+            tab = []
+            for ligne in mapCourante:
                 x = -30
                 y+= 60
                 for numCourant in ligne:
                     x += 62
                     if numCourant == 1:
                         sol = Object(x,y,"images/objects/plateau1.png")
-                        tab2.append(sol)
+                        tab.append(sol)
                     if numCourant == 2:
                         sol = Object(x,y,"images/objects/plateau1.png")
                         oxygene = Oxygene(x ,y - 41)
-                        tab2.append(sol)
-                        tab2.append(oxygene)
-            self.maps.append(tab2)
+                        tab.append(sol)
+                        tab.append(oxygene)
+            self.maps.append(tab)
     #Affiche la map séléctionné
     def afficherMap(self, screen):
-        recupMap = self.maps[0]
+        recupMap = self.maps[self.np]
         for solCourant in recupMap:
             screen.blit(solCourant.image,(solCourant.rect.x,solCourant.rect.y))
 
@@ -206,9 +218,9 @@ class Game:
     def testCollision(self):
         if not self.player.falling: return False
         for solCourant in self.maps[0]:
-            print(solCourant)
+            # print(solCourant)
             result = solCourant.test(self.player)
-            print(result)
+            # print(result)
             if result:
                 self.player.currentPlatform = result
                 self.player.y = result.y
