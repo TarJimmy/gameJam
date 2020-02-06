@@ -12,6 +12,10 @@ class Game:
     def __init__(self, pos_initialP, pos_initialN, pos_initialO):
         cheminBackGround = 'images/backgrounds/'
         cheminObject = 'images/objects/sol1.png'
+        self.policeOxygene = pygame.font.Font(None, 40)
+        self.policeOxygene.set_bold(True)
+        self.policeOxygene.set_underline(True)
+        self.colorText = pygame.Color(255,255,255)
         self.maps = []
         self.formatsMaps = []
         #Mesure du temps
@@ -100,17 +104,25 @@ class Game:
         self.formatsMaps.append(map)
     #Crée toutes les formations de maps
 
+    def afficherOxygene(self,screen):
+        if self.player.oxygene < 10:
+            numOxygene = str(round(self.player.oxygene,1))
+        else:
+            numOxygene = str(round(self.player.oxygene))
 
+        texte = "Oxygene : " + numOxygene
+        titre = self.policeOxygene.render(texte,True,self.colorText)
+        screen.blit(titre, (20,50))
 
     def createFormatMap(self):
         map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-                 [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1, 0],
-                 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
+                 [0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1],
+                 [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 3, 0, 1],
+                 [0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+                 [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0],
+                 [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.addFormatMap(map)
         map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -352,7 +364,6 @@ class Game:
             #Pour arreter d'afficher la solution quand on change de map
             self.solution = False
         if self.player.x < -20 and self.np > 0:
-
             self.player.x = self.pos_initialP[0]
             self.player.y = self.pos_initialP[1]
 
@@ -360,6 +371,7 @@ class Game:
             self.player.x = 15
             # self.player.y = 390
         if self.player.y > 568:
+            self.player.oxygene -= 100
             self.player.x = self.pos_initialP[0]
             self.player.y = self.pos_initialP[1]
 
@@ -405,3 +417,4 @@ class Game:
         # self.object.draw(screen)
         # self.blocage_affichage(screen)
         # self.collision_object()
+        self.afficherOxygene(screen)
