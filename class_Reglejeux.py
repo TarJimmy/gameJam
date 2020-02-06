@@ -32,7 +32,7 @@ class RegleJeux:
         self.buttonBack = Button(150,10,"images/boutons/boutonRetourAccueil.gif")
 
     def afficher(self,surface):
-        pygame.display.set_caption("Règle de jeux")
+        pygame.display.set_caption("Règles du jeu")
         surface.blit(self.bg,(0,0))
         surface.blit(self.buttonBack.image,(self.buttonBack.rect.x,self.buttonBack.rect.y))
         surface.blit(self.clavier,(580,120))
