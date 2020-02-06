@@ -13,21 +13,22 @@ class Histoire:
         self.policeTitre = pygame.font.Font(None, 40)
         self.policeTitre.set_bold(True)
         self.policeTitre.set_underline(True)
-
         self.policeRoles = pygame.font.Font(None, 30)
         self.nbHistoire = 0
         self.policeSource = pygame.font.Font(None, 40)
         self.policeSource.set_underline(True)
+        self.policeGameOver = pygame.font.Font(None, 90)
+        self.policeGameOver.set_bold(True)
         #Couleur du texte
         self.colorText = pygame.Color(255,255,255)
+        self.colorGameOver = pygame.Color(255,0,0)
         #Liste des differents rolesw
         self.histoire1 = []
         self.histoire2 = []
         self.histoire3 = []
-        #Listes des sources
-        # self.TitreRole = self.policeTitre.render("Roles :",True,self.colorText)
-        # self.TitreSource = self.policeTitre.render("Sources :",True,self.colorText)
+        self.histoire4 = []
 
+        self.titreGameOver = self.policeGameOver.render("Game Over",True,self.colorGameOver)
         self.buttonNext = Button(650,10,"images/boutons/boutonPasser.gif")
 
         self.addRoles("Les meilleures solutions pour réduire la pollution et préserver notre planète les connais-tu ?",1)
@@ -46,6 +47,12 @@ class Histoire:
         self.addRoles("incollable sur l’écologie. Maintenant tu peux transmettre le message aux autres et tous",3)
         self.addRoles("ensemble nous pourrons sauvez notre planète.",3)
 
+        self.addRoles("Bravo !! Tu as répondu avec succès à toutes les questions sur l’environnement. Tu es",3)
+        self.addRoles("incollable sur l’écologie. Maintenant tu peux transmettre le message aux autres et tous",3)
+        self.addRoles("ensemble nous pourrons sauvez notre planète.",3)
+
+        self.addRoles("Vous n'avez plus d'oxygène, vous êtes donc mort.",4)
+        self.addRoles("Vous pouvez toujours vous entrainer afin de devenir incollable sur l'écologie !",4)
 
     def addRoles(self,histoire,num):
         text = histoire
@@ -53,15 +60,16 @@ class Histoire:
             self.histoire1.append(self.policeRoles.render(text,True,self.colorText))
         elif num==2:
             self.histoire2.append(self.policeRoles.render(text,True,self.colorText))
-        else:
+        elif num==3:
             self.histoire3.append(self.policeRoles.render(text,True,self.colorText))
+        elif num==4:
+            self.histoire4.append(self.policeRoles.render(text,True,self.colorText))
     #fonction qui affiche les crédit
-    def afficher(self,screen,num):
+    def afficher(self,screen,num, player = None):
         screen.fill((0,0,0))
         screen.blit(self.buttonNext.image,(self.buttonNext.rect.x,self.buttonNext.rect.y))
-        i = 80
+        i = 120
         # screen.blit(self.TitreRole, (20,90))
-        i += 40
         #I est la séparation entre 2 textes
         #Affiche tous les roles
         if num==1:
@@ -72,7 +80,15 @@ class Histoire:
             for rolesCourant in self.histoire2:
                 screen.blit(rolesCourant, (20,i+20))
                 i+= 40
-        else:
+        elif num ==3:
             for rolesCourant in self.histoire3:
+                screen.blit(rolesCourant, (20,i+20))
+                i+= 40
+                text = "Vous avez obtenue : " + str(round(player.oxygene)) + "points d'oxygènes"
+                screen.blit(self.policeTitre.render(text,True,self.ColorText))
+        elif num ==4:
+            screen.blit(self.titreGameOver,(300, 200))
+            i += 200
+            for rolesCourant in self.histoire4:
                 screen.blit(rolesCourant, (20,i+20))
                 i+= 40

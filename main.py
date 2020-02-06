@@ -39,7 +39,20 @@ while continu:
     if continu:
         #boucle tant que cette condition est vrai
         while running and retourAccueil==False:
-            if MomentHistoire == True:
+            if game.player.oxygene < 0:
+                game.numHistoire = 4
+                game.afficherHistoire(screen)
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        running = False
+                        continu = False
+                    elif event.type == pygame.MOUSEBUTTONUP: # quand je relache le bouton
+                        if event.button == 1: # 1= clique gauche
+                            if game.histoire.buttonNext.isClicked(event.pos):
+                                MomentHistoire = False
+                                retourAccueil = True
+                                running = False
+            elif MomentHistoire == True:
                 game.afficherHistoire(screen)
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -104,6 +117,5 @@ while continu:
                                     game.solution=True
                                     game.mesNpc[game.np].end = True
                                     print("Mauvaise réponse")
-
             pygame.display.flip()
 pygame.quit()
