@@ -32,7 +32,7 @@ class Game:
         #Force de la gravité
         self.gravity = 2
         #Numéro du background
-        self.np = 8
+        self.np = 0
         #Largeur de l'écran
         self.width = 960
         #Hauteur de l'écran
@@ -40,7 +40,7 @@ class Game:
         #Classe pour raconter l'histoire du jeu
         self.histoire = Histoire()
         #Numéro de l'histoire courante
-        self.numHistoire = 2
+        self.numHistoire = 1
         #Le numero de page à été modifié (sert pour laffichage de l'histoire)
         self.npModif = False
         #Variable pour détecter si player proche de npc
