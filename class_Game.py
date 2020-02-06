@@ -14,7 +14,6 @@ class Game:
         cheminObject = 'images/objects/sol1.png'
         self.maps = []
         self.formatsMaps = []
-        self.mapCourante = None
         #Mesure du temps
         self.frame_count = 0
         self.frame_rate = 60
@@ -347,6 +346,8 @@ class Game:
             self.npModif = True
             self.mapCourante.clear()
             self.mapCourante = self.maps[self.np]
+            #Pour arreter d'afficher la solution quand on change de map
+            self.solution = False
         if self.player.x < -20 and self.np > 0:
 
             self.player.x = self.pos_initialP[0]
