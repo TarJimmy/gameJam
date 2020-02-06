@@ -90,6 +90,9 @@ class Game:
     def addFormatMap(self,map):
         self.formatsMaps.append(map)
     #Crée toutes les formations de maps
+
+
+
     def createFormatMap(self):
         map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
@@ -101,28 +104,35 @@ class Game:
                  [1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
         self.addFormatMap(map)
-        print(self.formatsMaps)
+        map = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        self.addFormatMap(map)
     #Initialise toutes les maps (en créant les blocs associé)
     def initMap(self):
         self.createFormatMap()
-        y = -35
         i = 0
-        tab2 = []
-        for tab in self.formatsMaps:
-            tab2.clear()
-            for ligne in tab:
+        for mapCourante in self.formatsMaps:
+            y = -35
+            tab = []
+            for ligne in mapCourante:
                 x = -30
                 y+= 60
                 for solCourant in ligne:
                     x += 62
                     if solCourant == 1:
                         sol = Object(x,y,"images/objects/plateau1.png")
-                        tab2.append(sol)
-            self.maps.append(tab2)
-        print(self.maps)
+                        tab.append(sol)
+            self.maps.append(tab)
     #Affiche la map séléctionné
-    def afficherMap(self, screen):
-        recupMap = self.maps[0]
+    def afficherMap(self, screen,np):
+        recupMap = self.maps[np]
         for solCourant in recupMap:
             screen.blit(solCourant.image,(solCourant.rect.x,solCourant.rect.y))
 
@@ -197,7 +207,6 @@ class Game:
         if self.player.x < -20 and self.np == 0:
             self.player.x = 15
             self.player.y = 390
-
     def actualiser(self, screen):
         W, H = 1000, 500
         HW, HH = W / 2, H / 2
@@ -206,11 +215,11 @@ class Game:
         WHITE = (0, 255, 0, 255)
         self.plateaux(screen)
         self.changerPlateaux()
-        self.afficherMap(screen)
+        self.afficherMap(screen,self.np)
         self.player.do()
         self.player.draw(screen)
         PLATFORMS = self.player.platforms()
-        PLATFORMS.add(self.player.platform(0, H - 10, W))
+        PLATFORMS.add(self.player.platform(0, H - 10, 1000))
         PLATFORMS.add(self.player.platform(200, 400, 100))
         PLATFORMS.add(self.player.platform(300, 300, 100))
         # for i in range(0, 50):
