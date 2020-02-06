@@ -109,12 +109,12 @@ while continu:
                                 # or self.bouton4.isClicked(event.pos) or self.bouton5.isClicked(event.pos):
                                     game.solution=True
                                     game.mesNpc[game.np].end = True
-                                    game.player.oxygene -= 150
+                                    game.player.oxygene += game.mesNpc[game.np].bonus
                                     game.numQuest += 1
                                 else:
                                     game.solution=True
                                     game.mesNpc[game.np].end = True
-                                    game.player.oxygene += game.mesNpc[game.np]
+                                    game.player.oxygene -= 150
                                     game.numQuest += 1
 
             pygame.display.flip()
