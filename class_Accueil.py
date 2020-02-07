@@ -2,6 +2,7 @@ import pygame
 from class_Button import Button
 from class_Credit import Credit
 from class_RegleJeux import RegleJeux
+from class_Classement import Classement
 class Accueil:
     #Construteur de l'accueil
 
@@ -40,10 +41,13 @@ class Accueil:
         self.boutonCredit.redimensionne(129,30)
         self.boutonRegle = Button(220,310,"images/boutons/boutonRegleJeu.gif")
         self.boutonRegle.redimensionne(343,47)
+        self.boutonRecord = Button(5,self.height -35,"images/boutons/boutonRecord.gif")
+        self.boutonRecord.redimensionne(151,30)
         self.logo = Button(275,10,"images/boutons/logo.png")
         self.logo.redimensionne(230,200)
         self.credit = Credit()
         self.regle = RegleJeux()
+        self.record = Classement()
 
     #fonction qui affiche l'acceuil
     def afficher(self):
@@ -54,6 +58,7 @@ class Accueil:
         credit = False
         continu = True
         regleJeu = False
+        record = False
         while self.running:
             if credit:
                 self.screen = pygame.display.set_mode((self.credit.width,self.credit.height))
@@ -81,6 +86,19 @@ class Accueil:
                         if event.button == 1: # 1= clique gauche
                             if self.regle.buttonBack.isClicked(event.pos):
                                 regleJeu = False
+            elif record:
+                self.screen = pygame.display.set_mode((self.record.width,self.record.height))
+                #Affiche le titre des roles
+                self.record.afficher(self.screen)
+                for event in pygame.event.get():
+                    # si l'evenement est fermeture de fenetre
+                    if event.type == pygame.QUIT:
+                        self.running = False
+                        continu = False
+                    elif event.type == pygame.MOUSEBUTTONUP: # quand je relache le bouton
+                        if event.button == 1: # 1= clique gauche
+                            if self.record.buttonBack.isClicked(event.pos):
+                                record = False
 
             else:
                 self.screen = pygame.display.set_mode((self.width,self.height))
@@ -91,6 +109,7 @@ class Accueil:
                 self.screen.blit(self.boutonJouer.image, (self.boutonJouer.rect.x,self.boutonJouer.rect.y))
                 self.screen.blit(self.boutonQuitter.image, (self.boutonQuitter.rect.x,self.boutonQuitter.rect.y))
                 self.screen.blit(self.boutonCredit.image, (self.boutonCredit.rect.x,self.boutonCredit.rect.y))
+                self.screen.blit(self.boutonRecord.image, (self.boutonRecord.rect.x,self.boutonRecord.rect.y))
                 self.screen.blit(self.logo.image, (self.logo.rect.x,self.logo.rect.y))
 
                 #Parcours tous les évenements possibles
@@ -107,6 +126,8 @@ class Accueil:
                                 credit = True
                             if self.boutonRegle.isClicked(event.pos):
                                 regleJeu = True
+                            if self.boutonRecord.isClicked(event.pos):
+                                record = True
                             if  self.boutonQuitter.isClicked(event.pos):
                                 self.running = False
                                 continu = False

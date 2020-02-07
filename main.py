@@ -111,13 +111,9 @@ while continu:
                                     game.mesNpc[game.np].end = True
                                     game.player.oxygene -= 150
                                     game.numQuest += 1
-                                    print("rep fausse")
                                 else:
                                     game.solution=True
                                     game.mesNpc[game.np].end = True
-                                    print("Hey")
-                                    for npc in game.mesNpc:
-                                        print(npc.bonus)
                                     game.player.oxygene += game.mesNpc[game.np].bonus
                                     game.numQuest += 1
 

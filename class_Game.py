@@ -1,4 +1,4 @@
-import pygame
+import pygame,datetime
 import math, random, sys
 from class_Player import Player
 from class_Object import Object
@@ -40,6 +40,7 @@ class Game:
         #Classe pour raconter l'histoire du jeu
         self.histoire = Histoire()
         #Numéro de l'histoire courante
+        self.recordEnregistrer = False
         self.numHistoire = 2
         #Le numero de page à été modifié (sert pour laffichage de l'histoire)
         self.npModif = False
@@ -97,7 +98,34 @@ class Game:
         # )
 
     def afficherHistoire(self, screen):
-        self.histoire.afficher(screen,self.numHistoire, self.player)
+        if self.numHistoire == 3:
+            if self.recordEnregistrer == False:
+                text = self.MetRecord()
+                self.recordEnregistrer = True
+        else:
+            self.histoire.afficher(screen,self.numHistoire, self.player)
+
+    def MetRecord(self):
+        fichier = open("records.txt","a")
+        date = datetime.datetime.now()
+        textDate = str(date.year) + "/" + str(date.month) +"/" + str(date.day) + " " + str(date.hour) +"h " + str(date.minute)
+        textRecord = str(round(self.player.oxygene))
+        text = textDate + "--" + textRecord +"//"
+        fichier.write(text)
+        fichier.close()
+
+    def recupRecord(self):
+        fichier = open("records.txt","r")
+        tout = fichier.read()
+        record = 0
+        tout = tout.split('//')
+        for recordCourant in tout:
+            coupRecord = recordCourant.split("--")
+            numRecord = coupRecord[len(coupRecord)-1]
+            if numRecord > str(record):
+                text = "Record actuel : " + coupRecord[1] + "oxygènes" + "le " + coupRecord[0]
+
+        return text
 
     def addSol(self, x,y,cheminImage):
         sol = Object(x,y,cheminImage)

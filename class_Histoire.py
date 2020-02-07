@@ -85,8 +85,8 @@ class Histoire:
                 screen.blit(rolesCourant, (20,i+20))
                 i+= 40
 
-            text = "Vous avez obtenue : " + str(round(player.oxygene)) + " points d'oxygènes"
-            screen.blit(self.policeTitre.render(text,True,self.colorText), (60, i+20))
+            text = "Vous avez obtenue : " + str(round(player.oxygene)) + "points d'oxygènes"
+            screen.blit(self.policeTitre.render(text,True,self.colorText))
         elif num ==4:
             screen.blit(self.titreGameOver,(300, 200))
             i += 200
