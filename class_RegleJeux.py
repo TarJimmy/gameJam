@@ -23,10 +23,10 @@ class RegleJeux:
         self.texte8= self.policetexte.render('Si vous trouvez la réponse il vous transmet une bonbonne',True,(255,255,255))
         self.texte9= self.policetexte.render("d'oxygène nécessaire pour votre survie.",True,(255,255,255))
         self.texte10= self.policetexte.render('Vous devrez faire preuve de vigilance car votre oxygène diminue',True,(255,255,255))
-        self.texte11= self.policetexte.render('progressivement à cause de vos actions. Vous devez allier dextérité',True,(255,255,255))
+        self.texte11= self.policetexte.render('progressivement en fonction de vos actions. Vous devez allier dextérité',True,(255,255,255))
         self.texte111=self.policetexte.render("et bon sens afin d'atteindre la dernière ville.",True,(255,255,255))
-        self.texte12=self.policetexte.render('Dans le cas contraire vous mourrez asphyxié.',True,(255,255,255))
-        self.texteBonus1=self.policetexte.render("Les bombonnes d'air que vous trouverez sur votre chemin",True,(255,255,255))
+        self.texte12=self.policetexte.render('Dans le cas contraire vous mourrerez asphyxié.',True,(255,255,255))
+        self.texteBonus1=self.policetexte.render("Les bonbonnes d'air que vous trouverez sur votre chemin",True,(255,255,255))
         self.texteBonus2=self.policetexte.render("permettent de récupérer de l'oxygène facilement.",True,(255,255,255))
         self.texte121=self.policetexte.render('Bonne chance !',True,(255,255,255))
 
@@ -40,7 +40,7 @@ class RegleJeux:
         self.texte18=self.policecommande.render('Le gardien de la nature vous pose des questions. Si vous ',True,(255,255,255))
         self.texte19=self.policecommande.render("répondez juste il vous donne de l'oxygène. Dans le cas",True,(255,255,255))
         self.texte20=self.policecommande.render('contraire il vous en retire. Des bombonnes sont également',True,(255,255,255))
-        self.texte21=self.policecommande.render("disponibles et donnent accès des bonus d'oxygène.",True,(255,255,255))
+        self.texte21=self.policecommande.render("disponibles et donnent accès à des bonus d'oxygène.",True,(255,255,255))
         self.buttonBack = Button(160,510,"images/boutons/boutonRetourAccueil.gif")
 
     def afficher(self,surface):
