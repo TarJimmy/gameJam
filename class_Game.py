@@ -15,7 +15,7 @@ class Game:
         self.policeOxygene = pygame.font.Font(None, 40)
         self.policeOxygene.set_bold(True)
         self.policeOxygene.set_underline(True)
-        self.colorText = pygame.Color(255,255,255)
+        self.colorText = pygame.Color(255,0,0)
         self.maps = []
         self.formatsMaps = []
         self.mesOxygene = []
@@ -99,7 +99,7 @@ class Game:
         # )
 
     def afficherHistoire(self, screen):
-            if self.numHistoire == 3 and self.recordEnregistrer:
+            if self.numHistoire == 3 and not self.recordEnregistrer:
                 self.metRecord()
                 self.recordEnregistrer = True
             self.histoire.afficher(screen,self.numHistoire, self.player)

@@ -41,11 +41,11 @@ class Classement:
         tout = fichier.read()
         record = 0
         tout = tout.split('//')
-        if(len(self.tab)>1):
+        if(len(self.tab)>0):
             for recordCourant in self.tab:
                 coupRecord = recordCourant.split("--")
                 date = coupRecord[len(coupRecord)-2].split(" ")
-                text = coupRecord[len(coupRecord)-1] + " oxygènes: " + date[len(date)-2] + " à " + date[len(date)-1]
+                text = coupRecord[len(coupRecord)-1] + " oxygènes: " + date[len(date)-2] + "" + date[len(date)-1]
                 pText = self.policeRoles.render(text,True,self.colorText)
                 screen.blit(pText,(60, i+20))
                 i+= 40
