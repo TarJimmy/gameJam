@@ -25,9 +25,10 @@ while continu:
     pygame.display.set_caption("Earth Zero²")
     #fond sonore
     SIFFLEMENT = pygame.mixer.music.load("sons/fond.wav")
+    pygame.mixer.music.set_volume(0.05)
     pygame.mixer.music.play(20, 0.0)
     #effet sonore
-    sonjump=pygame.mixer.Sound("sons/jumping.wav")
+    
 
     screen = pygame.display.set_mode((game.width,game.height))
     #Variable en fonction que ce que l'on doit afficher

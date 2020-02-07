@@ -394,6 +394,10 @@ class Game:
                 elif solCourant.type == "oxygene" and solCourant.end == False:
                         self.player.oxygene += solCourant.bonus
                         solCourant.end = True
+                        sondialogue=pygame.mixer.Sound("sons/bombonne.wav")
+                        sondialogue.play()
+
+
         return False
     def do(self):
         self.testCollision(self.player)
