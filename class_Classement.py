@@ -41,8 +41,7 @@ class Classement:
         tout = fichier.read()
         record = 0
         tout = tout.split('//')
-        print(len(self.tab))
-        if(len(self.tab)==1):
+        if(len(self.tab)>0):
             for recordCourant in self.tab:
                 coupRecord = recordCourant.split("--")
                 date = coupRecord[len(coupRecord)-2].split(" ")

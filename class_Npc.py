@@ -12,7 +12,6 @@ class Npc(pygame.sprite.Sprite):
         cheminImage = "images/npc/"
         self.char = pygame.image.load(cheminImage+'L9E.png')
         self.bonus = random.randint(300, 500)
-        print(self.bonus)
 
     def draw(self,window):
         #On retire le npc s'il a donné la solution

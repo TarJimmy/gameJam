@@ -40,12 +40,8 @@ class Game:
         #Classe pour raconter l'histoire du jeu
         self.histoire = Histoire()
         #Numéro de l'histoire courante
-<<<<<<< HEAD
         self.recordEnregistrer = False
-        self.numHistoire = 2
-=======
         self.numHistoire = 1
->>>>>>> abaf435e38fcda61161676065f1cb70654150597
         #Le numero de page à été modifié (sert pour laffichage de l'histoire)
         self.npModif = False
         #Variable pour détecter si player proche de npc
@@ -60,6 +56,7 @@ class Game:
         self.bX = 20
         self.bY = 505
         self.solution = False
+        self.recordEnregistrer = False
         #Compteur de question
         self.numQuest = 1
         self.msg = None
@@ -102,9 +99,12 @@ class Game:
         # )
 
     def afficherHistoire(self, screen):
+            if self.numHistoire == 3 and self.recordEnregistrer:
+                self.metRecord()
+                self.recordEnregistrer = True
             self.histoire.afficher(screen,self.numHistoire, self.player)
 
-    def MetRecord(self):
+    def metRecord(self):
         fichier = open("records.txt","a")
         date = datetime.datetime.now()
         textDate = str(date.year) + "/" + str(date.month) +"/" + str(date.day) + " " + str(date.hour) +"h " + str(date.minute)

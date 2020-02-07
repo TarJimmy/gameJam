@@ -50,7 +50,7 @@ class Histoire:
         self.addRoles("Vous n'avez plus d'oxygène, vous êtes donc mort.",4)
         self.addRoles("Vous pouvez toujours vous entrainer afin de devenir incollable sur l'écologie !",4)
 
-    def addRoles(self,histoire,num):
+    def addRoles(self,histoire,num, player = None):
         text = histoire
         if num==1:
             self.histoire1.append(self.policeRoles.render(text,True,self.colorText))
@@ -82,7 +82,7 @@ class Histoire:
                 i+= 40
 
             text = "Vous avez obtenue : " + str(round(player.oxygene)) + "points d'oxygènes"
-            screen.blit(self.policeTitre.render(text,True,self.colorText))
+            screen.blit(self.policeTitre.render(text,True,self.colorText),(60,i+40))
         elif num ==4:
             screen.blit(self.titreGameOver,(300, 200))
             i += 200

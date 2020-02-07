@@ -28,7 +28,7 @@ while continu:
     pygame.mixer.music.set_volume(0.05)
     pygame.mixer.music.play(20, 0.0)
     #effet sonore
-    
+
 
     screen = pygame.display.set_mode((game.width,game.height))
     #Variable en fonction que ce que l'on doit afficher
@@ -110,22 +110,13 @@ while continu:
                                 # or self.bouton4.isClicked(event.pos) or self.bouton5.isClicked(event.pos):
                                     game.solution=True
                                     game.mesNpc[game.np].end = True
-                                    game.player.oxygene += game.mesNpc[game.np].bonus
+                                    game.player.oxygene += 300
                                     game.numQuest += 1
-<<<<<<< HEAD
-                                else:
-                                    game.solution=True
-                                    game.mesNpc[game.np].end = True
-                                    game.player.oxygene += game.mesNpc[game.np].bonus
-=======
-                                    print("REPONSE VRAIE !")
                                 else:
                                     game.solution=True
                                     game.mesNpc[game.np].end = True
                                     game.player.oxygene -= 150
->>>>>>> abaf435e38fcda61161676065f1cb70654150597
                                     game.numQuest += 1
-                                    print("REPONSE FAUSSE !")
 
             pygame.display.flip()
 pygame.quit()
