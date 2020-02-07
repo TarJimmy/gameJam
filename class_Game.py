@@ -98,11 +98,6 @@ class Game:
         # )
 
     def afficherHistoire(self, screen):
-        if self.numHistoire == 3:
-            if self.recordEnregistrer == False:
-                text = self.MetRecord()
-                self.recordEnregistrer = True
-        else:
             self.histoire.afficher(screen,self.numHistoire, self.player)
 
     def MetRecord(self):
