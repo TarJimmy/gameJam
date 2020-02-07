@@ -16,7 +16,7 @@ class RegleJeux:
         self.texte1 = self.policetexte.render('Objectif :',True,(255,0,0))
         self.texte2= self.policetexte.render('Durant la partie vous devez traverser la ville,',True,(255,255,255))
         self.texte3= self.policetexte.render("polluée, à l'aide de ventilateurs. Votre objectif",True,(255,255,255))
-        self.texte4= self.policetexte.render('est de répondre correctement aux questions du gardient',True,(255,255,255))
+        self.texte4= self.policetexte.render('est de répondre correctement aux questions du gardien',True,(255,255,255))
         self.texte5= self.policetexte.render('de la nature. Ce personnage est essentiel dans la partie.',True,(255,255,255))
         self.texte6= self.policetexte.render("Il permet de vous transmettre de l'oxygène pour avancer.",True,(255,255,255))
         self.texte7= self.policetexte.render("À chaque ville le gardien vous pose une question.",True,(255,255,255))
