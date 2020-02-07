@@ -32,7 +32,7 @@ class Game:
         #Force de la gravité
         self.gravity = 2
         #Numéro du background
-        self.np = 8
+        self.np = 0
         #Largeur de l'écran
         self.width = 960
         #Hauteur de l'écran
@@ -40,8 +40,12 @@ class Game:
         #Classe pour raconter l'histoire du jeu
         self.histoire = Histoire()
         #Numéro de l'histoire courante
+<<<<<<< HEAD
         self.recordEnregistrer = False
         self.numHistoire = 2
+=======
+        self.numHistoire = 1
+>>>>>>> abaf435e38fcda61161676065f1cb70654150597
         #Le numero de page à été modifié (sert pour laffichage de l'histoire)
         self.npModif = False
         #Variable pour détecter si player proche de npc
@@ -155,7 +159,7 @@ class Game:
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0],
                  [0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0],
                  [1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0],
                  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
@@ -256,15 +260,15 @@ class Game:
                 for numCourant in ligne:
                     x += 62
                     if numCourant == 1:
-                        sol = Object(x,y,"images/objects/plateau1.png")
+                        sol = Object(x,y,"images/objects/ventilateur.png")
                         tab.append(sol)
                     if numCourant == 2:
-                        sol = Object(x,y,"images/objects/plateau1.png")
+                        sol = Object(x,y,"images/objects/ventilateur.png")
                         oxygene = Oxygene(x ,y - 41)
                         tab.append(sol)
                         tab.append(oxygene)
                     if numCourant ==3:
-                        sol = Object(x+20,y,"images/objects/plateau1.png")
+                        sol = Object(x+20,y,"images/objects/ventilateur.png")
                         self.mesNpc.append(Npc(x,y-40))
                         tab.append(sol)
             self.maps.append(tab)
@@ -330,7 +334,7 @@ class Game:
 
     def afficherQuestion(self,screen):
         if self.lancementDialogue and self.save == self.player.x :
-            pygame.draw.rect(screen,(255,25,255),(18,470,930,90))
+            pygame.draw.rect(screen,(102,153,153),(18,470,930,90))
             self.quest.recupQuestionNum(self.numQuest)
             self.msg = self.quest.question
             self.show_dialog(self.quX,self.quY,screen)
@@ -351,9 +355,10 @@ class Game:
             self.show_dialog(distance+self.rX,self.rY,screen)
 
     def afficherSolution(self,screen):
-        pygame.draw.rect(screen,(255,25,255),(18,470,930,90))
+        pygame.draw.rect(screen,(102,153,153),(18,470,930,90))
         self.msg = self.quest.solution
         self.show_dialog(self.rX,self.rY,screen)
+        self.mesNpc[self.np].x = 1000
 
     def verifGravite(self):
         plateau11x = -30
@@ -416,6 +421,10 @@ class Game:
                 elif solCourant.type == "oxygene" and solCourant.end == False:
                         self.player.oxygene += solCourant.bonus
                         solCourant.end = True
+                        sondialogue=pygame.mixer.Sound("sons/bombonne.wav")
+                        sondialogue.play()
+
+
         return False
     def do(self):
         self.testCollision(self.player)

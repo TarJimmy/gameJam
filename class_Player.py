@@ -79,6 +79,9 @@ class Player(pygame.sprite.Sprite):
         if k[pygame.K_SPACE] and not self.falling:
             self.jumping = True
             self.jumpCounter = 0
+            sonjump = pygame.mixer.Sound("sons/jumping.wav")
+            sonjump.set_volume(0.1)
+            sonjump.play()
 
     # def test(self):
     #     if player.x < self.x1 or player.x > self.x2:
