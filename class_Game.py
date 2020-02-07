@@ -132,7 +132,7 @@ class Game:
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0],
                  [0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0],
                  [1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0],
                  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
@@ -307,7 +307,7 @@ class Game:
 
     def afficherQuestion(self,screen):
         if self.lancementDialogue and self.save == self.player.x :
-            pygame.draw.rect(screen,(255,25,255),(18,470,930,90))
+            pygame.draw.rect(screen,(102,153,153),(18,470,930,90))
             self.quest.recupQuestionNum(self.numQuest)
             self.msg = self.quest.question
             self.show_dialog(self.quX,self.quY,screen)
@@ -328,9 +328,10 @@ class Game:
             self.show_dialog(distance+self.rX,self.rY,screen)
 
     def afficherSolution(self,screen):
-        pygame.draw.rect(screen,(255,25,255),(18,470,930,90))
+        pygame.draw.rect(screen,(102,153,153),(18,470,930,90))
         self.msg = self.quest.solution
         self.show_dialog(self.rX,self.rY,screen)
+        self.mesNpc[self.np].x = 1000
 
     def verifGravite(self):
         plateau11x = -30
